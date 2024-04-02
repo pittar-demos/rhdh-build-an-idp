@@ -1,0 +1,4 @@
+namespace: rhdh
+
+resources:
+  - namespace.yaml
