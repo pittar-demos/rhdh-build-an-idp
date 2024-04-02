@@ -7,3 +7,7 @@ data:
     app:
       title: Super Duper IDP
 
+    backend:
+      auth:
+        keys:
+          - secret: abc123
