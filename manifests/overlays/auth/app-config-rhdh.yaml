@@ -1,0 +1,24 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config-rhdh
+data:
+  app-config-rhdh.yaml: |
+    app:
+      title: Super Duper IDP
+
+    signInPage: microsoft
+
+    auth:
+      environment: development
+      providers:
+        microsoft:
+          development:
+            clientId: ${AZURE_CLIENT_ID}
+            clientSecret: ${AZURE_CLIENT_SECRET}
+            tenantId: ${AZURE_TENANT_ID}
+
+    backend:
+      auth:
+        keys:
+          - secret: abc123
