@@ -6,6 +6,7 @@ data:
   app-config-rhdh.yaml: |
     app:
       title: Super Duper IDP
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
 
     signInPage: microsoft
 
