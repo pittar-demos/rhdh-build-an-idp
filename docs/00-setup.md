@@ -26,3 +26,17 @@ oc apply -k https://github.com/pittar-demos/demo-catalog/openshift-gitops-instan
 That will create an Argo CD `Application` that will update the existing config for the Argo CD instance that lives in the `openshift-gitops` namespace.
 
 Great!  Now we have OpenShift GitOps installed and configured.
+
+## Gitea
+
+Install the operator:
+
+```
+oc apply -k ...
+```
+
+Install an instance:
+
+```
+oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/manifests/setup/argocd/gitea
+```
