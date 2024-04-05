@@ -29,3 +29,7 @@ This will:
 * Deploy the Red Hat Developer Hub (Backstage) operator.
 
 This will take a few minutes to complete.  When you see Gitea (in the `scm` namespace) is up and running, you can continue on to the next step.
+
+Your base configuration is now in place and you're ready to start deploying and configuring your Internal Developer Platform!
+
+[1: Basic Red Hat Developer Hub Installation](01-rhdh-basic-install.md)

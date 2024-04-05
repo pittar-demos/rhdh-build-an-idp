@@ -1,9 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: rhdh-demo-template-collection
-  description: A collection of Backstage Golden Path Templates
-spec:
-  type: url
-  targets:
-    - https://gitea-scm.apps-crc.testing/templates/demo-templates/quarkus/template.yaml
