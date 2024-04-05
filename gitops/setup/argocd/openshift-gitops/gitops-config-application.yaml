@@ -9,7 +9,7 @@ metadata:
   name: openshift-gitops-config
 spec:
   destination:
-    namespace: scm
+    namespace: openshift-gitops
     server: https://kubernetes.default.svc
   project: default
   source:

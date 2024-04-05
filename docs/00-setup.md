@@ -20,7 +20,7 @@ oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operat
 And once that is up and running, let's complete the setup with GitOps!
 
 ```
-oc create -f -n openshift-gitops https://github.com/pittar-demos/rhdh-build-an-idp/gitops/setup/argocd/bootstrap/bootstrap-application.yaml
+oc create -f https://raw.githubusercontent.com/pittar-demos/rhdh-build-an-idp/main/gitops/setup/argocd/bootstrap/bootstrap-application.yaml -n openshift-gitops
 ```
 
 This will:
