@@ -10,4 +10,4 @@ data:
     backend:
       auth:
         keys:
-          - secret: abc123
+          - secret: ${BACKEND_AUTH_SECRET}
