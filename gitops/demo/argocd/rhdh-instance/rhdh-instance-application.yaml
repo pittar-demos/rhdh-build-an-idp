@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: gitops/demo/overlays/rhdh/basic
+    path: gitops/demo/overlays/basic
     repoURL: https://github.com/pittar-demos/rhdh-build-an-idp.git
     targetRevision: main
   syncPolicy:
