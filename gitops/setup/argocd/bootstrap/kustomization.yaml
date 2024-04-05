@@ -1,0 +1,6 @@
+resources:
+  - ../openshift-gitops
+  - ../gitea/operator
+  - ../gitea/instance
+  - ../rhdh/operator
+  #- ../openshift-pipelines/operator

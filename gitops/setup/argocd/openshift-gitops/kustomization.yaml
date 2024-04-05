@@ -1,0 +1,4 @@
+namespace: openshift-gitops
+
+resources:
+  - gitops-config-application.yaml

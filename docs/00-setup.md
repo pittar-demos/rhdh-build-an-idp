@@ -17,26 +17,15 @@ Let's install GitOps with the CLI... who wants to point-and-click anyway?
 oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/operator/overlays/latest
 ```
 
-And once that is up and running, let's configure it... with GitOps!
+And once that is up and running, let's complete the setup with GitOps!
 
 ```
-oc apply -k https://github.com/pittar-demos/demo-catalog/openshift-gitops-instances/argocd/openshift-gitops
+oc create -f -n openshift-gitops https://github.com/pittar-demos/rhdh-build-an-idp/gitops/setup/argocd/bootstrap/bootstrap-application.yaml
 ```
 
-That will create an Argo CD `Application` that will update the existing config for the Argo CD instance that lives in the `openshift-gitops` namespace.
+This will:
+* Perform additional configuration of Argo CD.
+* Install the Gitea operator and a Gitea instance.
+* Deploy the Red Hat Developer Hub (Backstage) operator.
 
-Great!  Now we have OpenShift GitOps installed and configured.
-
-## Gitea
-
-Install the operator:
-
-```
-oc apply -k ...
-```
-
-Install an instance:
-
-```
-oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/manifests/setup/argocd/gitea
-```
+This will take a few minutes to complete.  When you see Gitea (in the `scm` namespace) is up and running, you can continue on to the next step.

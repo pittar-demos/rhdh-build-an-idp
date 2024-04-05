@@ -1,4 +1,0 @@
-namespace: openshift-gitops
-
-resources:
-  - rhdh-instance-application.yaml
