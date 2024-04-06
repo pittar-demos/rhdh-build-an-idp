@@ -18,7 +18,6 @@ spec:
     targetRevision: main
   syncPolicy:
     automated:
-      prune: false
       selfHeal: true
     syncOptions:
       - ApplyOutOfSyncOnly=true
