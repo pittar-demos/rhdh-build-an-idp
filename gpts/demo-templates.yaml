@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: demo-gpt-collection
+  description: A collection of Backstage Golden Path Templates for this Demo
+spec:
+  type: url
+  targets:
+    - https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml

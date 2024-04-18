@@ -1,0 +1,37 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config-rhdh
+data:
+  app-config-rhdh.yaml: |
+    app:
+      title: Super Duper IDP
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+
+    signInPage: microsoft
+
+    auth:
+      environment: production
+      providers:
+        microsoft:
+          production:
+            clientId: ${AZURE_CLIENT_ID}
+            clientSecret: ${AZURE_CLIENT_SECRET}
+            tenantId: ${AZURE_TENANT_ID}
+            domainHint: ${AZURE_TENANT_ID}
+            additionalScopes:
+              - Mail.Send
+
+    integrations:
+      gitea:
+        - host: gitea-scm.apps-crc.testing
+          username: gitea_admin
+          password: openshift
+
+    backend:
+      auth:
+        keys:
+          - secret: abc123
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+      cors:
+        origin: https://backstage-developer-hub-rhdh.apps-crc.testing
