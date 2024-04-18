@@ -42,3 +42,5 @@ data:
       baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
       cors:
         origin: https://backstage-developer-hub-rhdh.apps-crc.testing
+      env:
+        NODE_TLS_REJECT_UNAUTHORIZED: "0"
