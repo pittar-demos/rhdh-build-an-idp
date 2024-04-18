@@ -98,8 +98,8 @@ spec:
       action: fetch:template
       input:
         url: ./skeleton
-        copyWithoutTemplating:
-          - .github/workflows/*
+        # copyWithoutTemplating:
+        #   - .github/workflows/*
         values:
           component_id: ${{ parameters.component_id }}
           namespace: ${{ parameters.component_id }}-dev
@@ -130,48 +130,48 @@ spec:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: '/catalog-info.yaml'
 
-    - id: template-gitops-deployment
-      name: Generating Deployment Resources
-      action: fetch:template
-      input:
-        url: ./manifests
-        copyWithoutTemplating: []
-        values:
-          component_id: ${{ parameters.component_id }}
-          description: ${{ parameters.description }}
-          destination: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops
-          source_repository: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
-          repository_name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
-          git_owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
-          cluster: .apps.cluster-xxxxx.xxxxx.sandbox123.opentlc.com
-          namespace: ${{ parameters.component_id }}-dev
-          image_registry: ${{ parameters.image_registry }}
-          image_host: ${{ parameters.image_host }}
-          image_organization: ${{ parameters.image_organization }}
-          image_name: ${{ parameters.component_id }}
-          port: 8080
-          deployment_name: quarkus-template
-        targetPath: ./tenant-gitops
+    # - id: template-gitops-deployment
+    #   name: Generating Deployment Resources
+    #   action: fetch:template
+    #   input:
+    #     url: ./manifests
+    #     copyWithoutTemplating: []
+    #     values:
+    #       component_id: ${{ parameters.component_id }}
+    #       description: ${{ parameters.description }}
+    #       destination: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops
+    #       source_repository: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
+    #       repository_name: ${{ (parameters.repoUrl | parseRepoUrl).repo }}
+    #       git_owner: ${{ (parameters.repoUrl | parseRepoUrl).owner }}
+    #       cluster: .apps.cluster-xxxxx.xxxxx.sandbox123.opentlc.com
+    #       namespace: ${{ parameters.component_id }}-dev
+    #       image_registry: ${{ parameters.image_registry }}
+    #       image_host: ${{ parameters.image_host }}
+    #       image_organization: ${{ parameters.image_organization }}
+    #       image_name: ${{ parameters.component_id }}
+    #       port: 8080
+    #       deployment_name: quarkus-template
+    #     targetPath: ./tenant-gitops
 
-    - id: publish-gitops
-      name: Publishing to Resource Repository
-      action: publish:github
-      input:
-        repoUrl: github.com?repo=${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops&owner=${{ (parameters.repoUrl | parseRepoUrl).owner }}
-        title: gitops resources for ${{ parameters.component_id }}
-        description: gitops resources for ${{ parameters.component_id }}
-        sourcePath: ./tenant-gitops
-        repoVisibility: public
+    # - id: publish-gitops
+    #   name: Publishing to Resource Repository
+    #   action: publish:github
+    #   input:
+    #     repoUrl: github.com?repo=${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops&owner=${{ (parameters.repoUrl | parseRepoUrl).owner }}
+    #     title: gitops resources for ${{ parameters.component_id }}
+    #     description: gitops resources for ${{ parameters.component_id }}
+    #     sourcePath: ./tenant-gitops
+    #     repoVisibility: public
 
-    - id: create-argocd-resources
-      name: Create ArgoCD Resources
-      action: argocd:create-resources
-      input:
-        appName: ${{ parameters.component_id }}-bootstrap
-        argoInstance: main
-        namespace: janus-argocd
-        repoUrl: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops.git
-        path: 'argocd/'
+    # - id: create-argocd-resources
+    #   name: Create ArgoCD Resources
+    #   action: argocd:create-resources
+    #   input:
+    #     appName: ${{ parameters.component_id }}-bootstrap
+    #     argoInstance: main
+    #     namespace: janus-argocd
+    #     repoUrl: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}-gitops.git
+    #     path: 'argocd/'
 
   output:
     links:
