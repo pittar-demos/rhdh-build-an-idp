@@ -10,6 +10,9 @@ spec:
       configMaps:
         - name: app-config-rhdh
     extraEnvs:
+      envs:
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
       secrets:
         - name: rhdh-secrets
     extraFiles:
