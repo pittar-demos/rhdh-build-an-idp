@@ -9,7 +9,7 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
         - name: app-config-rhdh
-    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+    #dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
       envs:
         - name: NODE_TLS_REJECT_UNAUTHORIZED
