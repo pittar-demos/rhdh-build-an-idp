@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-    - https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
+    - https://github.com/pittar-demos/rhdh-build-an-idp/blob/main/gpts/gitea/quarkus-backend/template.yaml
