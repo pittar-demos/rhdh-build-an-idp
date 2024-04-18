@@ -28,6 +28,13 @@ data:
           username: gitea_admin
           password: openshift
 
+    catalog:
+        rules:
+          - allow: [Component, System, Group, Resource, Location, Template, API]
+        locations:
+          - type: url
+            target: https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/raw/branch/main/gpts/gitea/quarkus-backend/template.yaml
+
     backend:
       auth:
         keys:
