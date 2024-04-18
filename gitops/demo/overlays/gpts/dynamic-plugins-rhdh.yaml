@@ -7,6 +7,9 @@ data:
     includes:
       - dynamic-plugins.default.yaml
     plugins:
-      - package: '@backstage/plugin-scaffolder-backend-module-gitea'
+      - package: '@cmoulliard/plugin-scaffolder-backend-module-gitea'
         disabled: false
-        integrity: sha512-S8tOJfPjCR5ERn/CkV+uDRWaW1jH2dl3eKtzXt8EO8WAmG70H0kmnelEeWN7F+9Z5UOkY4ORA8wfg53OEyCtIQ==
+        integrity: sha512-bok0YyWLcjkG+/vw29z6dwFn/DsO76ohZnAa4vEqhUhA6RnA3qKTyTFCdYMxl5iajJT6RRDmYjZNnRXBRmHLBQ==
+      # - package: '@backstage/plugin-scaffolder-backend-module-gitea'
+      #   disabled: false
+      #   integrity: sha512-S8tOJfPjCR5ERn/CkV+uDRWaW1jH2dl3eKtzXt8EO8WAmG70H0kmnelEeWN7F+9Z5UOkY4ORA8wfg53OEyCtIQ==
