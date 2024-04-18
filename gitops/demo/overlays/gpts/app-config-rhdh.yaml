@@ -25,7 +25,7 @@ data:
     integrations:
       gitea:
         - host: gitea-scm.apps-crc.testing
-          username: gitea_admin
+          username: developer
           password: openshift
 
     catalog:
