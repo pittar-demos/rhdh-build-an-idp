@@ -15,9 +15,9 @@ spec:
   parameters:
     - title: Provide information for the Quarkus Application
       required:
+        - component_id
         - project_name
         - description
-        - copmonent_id
       properties:
         component_id:
           title: Name
