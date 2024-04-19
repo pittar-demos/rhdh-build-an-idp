@@ -1,0 +1,83 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: test-application
+  title: Create a Quarkus Application
+  description: Create a Quarkus application using https://code.quarkus.io
+  tags:
+    - quarkus
+    - java
+    - maven
+spec:
+  owner: guests
+  type: service
+
+  parameters:
+    - title: Provide information for the Quarkus Application
+      required:
+        - project_name
+        - description
+        - copmonent_id
+      properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          default: my-demo-app
+          ui:field: EntityNamePicker
+        project_name:
+          title: Name
+          type: string
+          description: Project name
+        description:
+          title: Description
+          type: string
+          description: Project description
+
+    - title: Configure the Git repository
+      required:
+        - repo
+      properties:
+        repo:
+          title: Repository Location
+          type: object
+          properties:
+            host:
+              title: Repo Host
+              type: string
+              ui:field: RepoUrlPicker
+              ui:options:
+                allowedOwners:
+                  - andrew
+                  - redhat
+                allowedHosts:
+                  - gitea-scm.apps-crc.testing
+                  - localhost
+
+  steps:
+    - action: fetch:template
+      id: fetch-template
+      name: Fetch template
+      input:
+        url: ./skeletons/hello-world
+        values:
+          name: ${{ parameters.component_id }}
+          description: This is a dummy project
+
+
+    - id: publish
+      name: Publishing to a gitea git repository
+      action: publish:gitea
+      input:
+        description: This is ${{ parameters.component_id }}
+        repoUrl: ${{ parameters.repo.host }}
+        defaultBranch: main
+        repoVisibility: private
+
+  output:
+    links:
+      - title: Open the Source Code Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open the Catalog Info Component
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}

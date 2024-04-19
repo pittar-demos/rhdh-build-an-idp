@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-    - https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/raw/branch/main/gpts/gitea/quarkus-backend/template.yaml
+    - https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/raw/branch/main/gpts/gitea/test/template.yaml
