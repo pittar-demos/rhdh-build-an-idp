@@ -12,6 +12,7 @@ spec:
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
       envs:
+        # Only needed because gitea uses a self-signed cert.
         - name: NODE_TLS_REJECT_UNAUTHORIZED
           value: "0"
       secrets:
