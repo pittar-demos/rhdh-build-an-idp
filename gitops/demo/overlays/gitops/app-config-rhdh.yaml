@@ -1,0 +1,57 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config-rhdh
+data:
+  app-config-rhdh.yaml: |
+    app:
+      title: Super Duper IDP
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+
+    signInPage: microsoft
+
+    auth:
+      environment: production
+      providers:
+        microsoft:
+          production:
+            clientId: ${AZURE_CLIENT_ID}
+            clientSecret: ${AZURE_CLIENT_SECRET}
+            tenantId: ${AZURE_TENANT_ID}
+            domainHint: ${AZURE_TENANT_ID}
+            additionalScopes:
+              - Mail.Send
+
+    integrations:
+      gitea:
+        - host: gitea-scm.apps-crc.testing
+          username: developer
+          password: openshift
+
+      argocd:
+        waitCycles: 25
+        appLocatorMethods:
+          - type: 'config'
+            instances:
+              - name: openshift-gitops
+                url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
+                username: ${ARGOCD_ADMIN_USER}
+                password: ${ARGCOD_ADMIN_PASSWORD}
+
+    catalog:
+        rules:
+          - allow: [Component, System, Group, Resource, Location, Template, API]
+        locations:
+          - type: url
+            target: https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
+            
+    backend:
+      auth:
+        keys:
+          - secret: abc123
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+      cors:
+        origin: https://backstage-developer-hub-rhdh.apps-crc.testing
+
+    enabled:
+      gitea: true
