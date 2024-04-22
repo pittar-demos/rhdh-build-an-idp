@@ -28,15 +28,15 @@ data:
           username: developer
           password: openshift
 
-      argocd:
-        waitCycles: 25
-        appLocatorMethods:
-          - type: 'config'
-            instances:
-              - name: openshift-gitops
-                url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
-                username: ${ARGOCD_ADMIN_USER}
-                password: ${ARGCOD_ADMIN_PASSWORD}
+    argocd:
+      waitCycles: 25
+      appLocatorMethods:
+        - type: 'config'
+          instances:
+            - name: openshift-gitops
+              url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
+              username: ${ARGOCD_ADMIN_USER}
+              password: ${ARGCOD_ADMIN_PASSWORD}
 
     catalog:
         rules:
@@ -54,4 +54,5 @@ data:
         origin: https://backstage-developer-hub-rhdh.apps-crc.testing
 
     enabled:
+      argocd: true
       gitea: true
