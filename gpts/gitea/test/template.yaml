@@ -33,6 +33,14 @@ spec:
           title: Description
           type: string
           description: Project description
+        owner:
+          title: Repo Owner
+          type: string
+          description: Your SCM host organization/group
+          default: development
+          enum:
+            - development
+
 
     - title: Configure the Git repository
       required:
@@ -61,9 +69,12 @@ spec:
       input:
         url: ./skeletons/hello-world
         values:
+          host: ${{ parameters.repo.host }}
+          component_id: ${{ parameters.component_id }}
           name: ${{ parameters.component_id }}
+          owner: ${{ parameters.owner }}
           description: This is a dummy project
-
+          destination: ${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
 
     - id: publish
       name: Publishing to a gitea git repository
@@ -73,6 +84,13 @@ spec:
         repoUrl: ${{ parameters.repo.host }}
         defaultBranch: main
         repoVisibility: private
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
 
   output:
     links:
