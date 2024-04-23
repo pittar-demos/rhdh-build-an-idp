@@ -1,21 +1,20 @@
-
-  apiVersion: backstage.io/v1alpha1
-  kind: Component
-  metadata:
-    name: ${{values.component_id | dump}}
-    {%- if values.description %}
-    description: ${{values.description | dump}}
-    {%- endif %}
-    annotations:
-      backstage.io/source-location: url:https://${{values.repoUrl}}/${{values.destination}}
-    tags:
-      - java
-      - quarkus
-    links:
-      - url: https://www.redhat.com/en/blog/channel/hybrid-cloud-infrastructure
-        title: Red Hat Blog
-        icon: web
-  spec:
-    type: service
-    lifecycle: production
-    owner: ${{values.owner | dump}}
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{values.component_id | dump}}
+  {%- if values.description %}
+  description: ${{values.description | dump}}
+  {%- endif %}
+  annotations:
+    backstage.io/source-location: url:https://${{values.destination}}
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://www.redhat.com/en/blog/channel/hybrid-cloud-infrastructure
+      title: Red Hat Blog
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: ${{values.owner | dump}}

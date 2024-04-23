@@ -18,6 +18,7 @@ spec:
         - component_id
         - project_name
         - description
+        - owner 
       properties:
         component_id:
           title: Name
@@ -41,7 +42,6 @@ spec:
           enum:
             - development
 
-
     - title: Configure the Git repository
       required:
         - repo
@@ -63,34 +63,34 @@ spec:
                   - localhost
 
   steps:
-    - action: fetch:template
-      id: fetch-template
-      name: Fetch template
-      input:
-        url: ./skeletons/hello-world
-        values:
-          host: ${{ parameters.repo.host }}
-          component_id: ${{ parameters.component_id }}
-          name: ${{ parameters.component_id }}
-          owner: ${{ parameters.owner }}
-          description: This is a dummy project
-          destination: ${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
-
-    - id: publish
-      name: Publishing to a gitea git repository
-      action: publish:gitea
-      input:
-        description: This is ${{ parameters.component_id }}
-        repoUrl: ${{ parameters.repo.host }}
-        defaultBranch: main
-        repoVisibility: private
-
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-        catalogInfoPath: "/catalog-info.yaml"
+  - action: fetch:template
+    id: fetch-template
+    name: Fetch template
+    input:
+      url: ./skeletons/hello-world
+      values:
+        host: ${{ parameters.host }}
+        component_id: ${{ parameters.component_id }}
+        name: ${{ parameters.component_id }}
+        owner: ${{ parameters.owner }}
+        description: This is a dummy project
+        destination: ${{ (parameters.host | parseRepoUrl).owner }}/${{
+          (parameters.host | parseRepoUrl).repo }}
+          
+  - id: publish
+    name: Publishing to a gitea git repository
+    action: publish:gitea
+    input:
+      description: This is ${{ parameters.component_id }}
+      repoUrl: ${{ parameters.repo.host }}
+      defaultBranch: main
+      repoVisibility: private
+  - id: register
+    name: Register
+    action: catalog:register
+    input:
+      repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+      catalogInfoPath: /main/catalog-info.yaml
 
   output:
     links:
