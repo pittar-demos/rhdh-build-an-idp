@@ -27,7 +27,7 @@ data:
       rbac:
         admin:
           users:
-            - name: user:default/andrew.pitt
+            - name: user:default/andrew.pitt_gmail.com#EXT#@andrewpittgmail.onmicrosoft.com
 
     integrations:
       gitea:
