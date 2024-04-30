@@ -6,6 +6,7 @@ data:
   rhdh-config-rbac.yaml: |
     permission:
       enabled: true
+      policies-csv-file: ./rbac-policy.csv
       rbac:
         admin:
           users:
