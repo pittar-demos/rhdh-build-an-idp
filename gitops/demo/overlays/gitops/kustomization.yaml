@@ -6,4 +6,5 @@ resources:
   - rhdh-config-rbac.yaml
   - rhdh-rbac-policy.yaml
   - dynamic-plugins-rhdh.yaml
+  - developer-group.yaml
   - backstage.yaml
