@@ -64,7 +64,7 @@ spec:
 
   steps:
   - action: fetch:template
-    id: fetch-template
+    id: fetch-template-source
     name: Fetch template
     input:
       url: ./skeletons/hello-world
@@ -77,19 +77,43 @@ spec:
         destination: ${{ (parameters.host | parseRepoUrl).owner }}/${{
           (parameters.host | parseRepoUrl).repo }}
           
-  - id: publish
-    name: Publishing to a gitea git repository
+  - id: publish-source
+    name: Publishing to a gitea source repository
     action: publish:gitea
     input:
       description: This is ${{ parameters.component_id }}
       repoUrl: ${{ parameters.repo.host }}
       defaultBranch: main
       repoVisibility: private
+
+  - action: fetch:template
+    id: fetch-template-gitops
+    name: Fetch template
+    input:
+      url: ./skeletons/gitops
+      values:
+        host: ${{ parameters.host }}
+        component_id: ${{ parameters.component_id }}
+        name: ${{ parameters.component_id }}
+        owner: ${{ parameters.owner }}
+        description: This is a dummy project
+        destination: ${{ (parameters.host | parseRepoUrl).owner }}/${{
+          (parameters.host | parseRepoUrl).repo }}-gitops
+          
+  - id: publish-gitops
+    name: Publishing to a gitea gitops repository
+    action: publish:gitea
+    input:
+      description: This is ${{ parameters.component_id }}
+      repoUrl: ${{ parameters.repo.host }}-gitops
+      defaultBranch: main
+      repoVisibility: private
+
   - id: register
     name: Register
     action: catalog:register
     input:
-      repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+      repoContentsUrl: ${{ steps.publish-source.output.repoContentsUrl }}
       catalogInfoPath: /main/catalog-info.yaml
 
   output:
