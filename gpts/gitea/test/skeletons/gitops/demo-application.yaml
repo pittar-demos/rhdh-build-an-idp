@@ -5,15 +5,15 @@ metadata:
   labels:
     gitops.ownedBy: gitops
     category: apps
-  name: ${{values.component_id | dump}}
+  name: ${{values.component_id}}
 spec:
   destination:
-    namespace: ${{values.component_id | dump}}
+    namespace: ${{values.component_id}}
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: overlays/cicd
-    repoURL: http://gitea.scm.svc.cluster.local:3000/${{ (parameters.host | parseRepoUrl).owner }}/${{values.component_id | dump}}-gitops.git
+    path: /
+    repoURL: http://gitea.scm.svc.cluster.local:3000/${{values.repo_owner}}/${{values.component_id}}-gitops.git
     targetRevision: main
   syncPolicy:
     automated:

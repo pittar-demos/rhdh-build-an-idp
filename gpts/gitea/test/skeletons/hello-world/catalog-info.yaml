@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.component_id | dump}}
+  name: ${{values.component_id}}
   {%- if values.description %}
-  description: ${{values.description | dump}}
+  description: ${{values.description}}
   {%- endif %}
   annotations:
-    backstage.io/source-location: url:https://${{values.destination}}
+    backstage.io/source-location: url:https://${{values.host}}/${{values.repo_owner}}/${{values.repo_name}}
   tags:
     - java
     - quarkus
@@ -17,4 +17,4 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: ${{values.owner | dump}}
+	owner: ${{values.owner | dump}}

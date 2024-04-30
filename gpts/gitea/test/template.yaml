@@ -64,62 +64,68 @@ spec:
 
   steps:
   - action: fetch:template
-    id: fetch-template-source
-    name: Fetch template
+    id: fetchTemplateSource
+    name: Fetch source template
     input:
       url: ./skeletons/hello-world
+      targetPath: ./source
       values:
-        host: ${{ parameters.host }}
+        host: ${{ (parameters.repo.host | parseRepoUrl).host }}
+        repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
+        repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}
         component_id: ${{ parameters.component_id }}
         name: ${{ parameters.component_id }}
         owner: ${{ parameters.owner }}
         description: This is a dummy project
-        destination: ${{ (parameters.host | parseRepoUrl).owner }}/${{
-          (parameters.host | parseRepoUrl).repo }}
           
-  - id: publish-source
+  - action: publish:gitea
+    id: publishSource
     name: Publishing to a gitea source repository
-    action: publish:gitea
     input:
       description: This is ${{ parameters.component_id }}
       repoUrl: ${{ parameters.repo.host }}
       defaultBranch: main
       repoVisibility: private
+      sourcePath: ./source
 
   - action: fetch:template
-    id: fetch-template-gitops
-    name: Fetch template
+    id: fetchTemplateGitops
+    name: Fetch gitops template
     input:
       url: ./skeletons/gitops
+      targetPath: ./gitops
       values:
-        host: ${{ parameters.host }}
+        host: ${{ (parameters.repo.host | parseRepoUrl).host }}
+        repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
+        repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
         component_id: ${{ parameters.component_id }}
         name: ${{ parameters.component_id }}
         owner: ${{ parameters.owner }}
         description: This is a dummy project
-        destination: ${{ (parameters.host | parseRepoUrl).owner }}/${{
-          (parameters.host | parseRepoUrl).repo }}-gitops
           
-  - id: publish-gitops
+  - action: publish:gitea
+    id: publishGitops
     name: Publishing to a gitea gitops repository
-    action: publish:gitea
     input:
       description: This is ${{ parameters.component_id }}
       repoUrl: ${{ parameters.repo.host }}-gitops
       defaultBranch: main
       repoVisibility: private
+      sourcePath: ./gitops
 
-  - id: register
+  - action: catalog:register
+    id: register
     name: Register
-    action: catalog:register
     input:
-      repoContentsUrl: ${{ steps.publish-source.output.repoContentsUrl }}
+      repoContentsUrl: ${{ steps.publishSource.output.repoContentsUrl }}
       catalogInfoPath: /main/catalog-info.yaml
 
   output:
     links:
       - title: Open the Source Code Repository
-        url: ${{ steps.publish.output.remoteUrl }}
+        url: ${{ steps.publishSource.output.remoteUrl }}
+      - title: Open the GitOps Repository
+        url: ${{ steps.publishGitops.output.remoteUrl }}
       - title: Open the Catalog Info Component
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
