@@ -4,6 +4,6 @@ resources:
   - ../../base
   - app-config-rhdh.yaml
   - rhdh-config-rbac.yaml
-  - rhdh-config-rbac.yaml
+  - rhdh-rbac-policy.yaml
   - dynamic-plugins-rhdh.yaml
   - backstage.yaml
