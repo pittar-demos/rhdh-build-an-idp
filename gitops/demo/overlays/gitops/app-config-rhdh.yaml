@@ -22,13 +22,6 @@ data:
             additionalScopes:
               - Mail.Send
 
-    permission:
-      enabled: true
-      rbac:
-        admin:
-          users:
-            - name: user:default/andrew.pitt_gmail.com#EXT#@andrewpittgmail.onmicrosoft.com
-
     integrations:
       gitea:
         - host: gitea-scm.apps-crc.testing

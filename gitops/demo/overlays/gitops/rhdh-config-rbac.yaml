@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rhdh-config-rbac
+data:
+  rhdh-config-rbac.yaml: |
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/c383241b-4321-4ffb-8f78-08f8787d5746
