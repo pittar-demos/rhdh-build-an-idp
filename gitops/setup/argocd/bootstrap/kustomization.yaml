@@ -1,6 +1,7 @@
 resources:
   - ../openshift-gitops
-  - ../openshift-pipelines
+# Temporarily removing pipelines
+#  - ../openshift-pipelines
   - ../gitea/operator
   - ../gitea/instance
   - ../rhdh/operator
