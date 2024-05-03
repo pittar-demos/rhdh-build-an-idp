@@ -6,8 +6,15 @@ data:
   rhdh-config-rbac.yaml: |
     permission:
       enabled: true
-      policies-csv-file: ./rbac-policy.csv
       rbac:
         admin:
           users:
             - name: user:default/c383241b-4321-4ffb-8f78-08f8787d5746
+
+# permission:
+#   enabled: true
+#   policies-csv-file: ./rbac-policy.csv
+#   rbac:
+#     admin:
+#       users:
+#         - name: user:default/c383241b-4321-4ffb-8f78-08f8787d5746
