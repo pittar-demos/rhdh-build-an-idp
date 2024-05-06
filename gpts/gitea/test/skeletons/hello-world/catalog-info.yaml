@@ -7,6 +7,7 @@ metadata:
   {%- endif %}
   annotations:
     backstage.io/source-location: url:https://${{values.host}}/${{values.repo_owner}}/${{values.repo_name}}
+    argocd/app-name: '${{values.component_id}}'
   tags:
     - java
     - quarkus
@@ -17,4 +18,4 @@ metadata:
 spec:
   type: service
   lifecycle: production
-	owner: ${{values.owner | dump}}
+  owner: ${{values.owner | dump}}
