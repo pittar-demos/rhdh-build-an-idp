@@ -120,6 +120,18 @@ spec:
       repoContentsUrl: ${{ steps.publishSource.output.repoContentsUrl }}
       catalogInfoPath: catalog-info.yaml
 
+  - id: createArgocdResources
+    name: Create the ArgoCD Resources
+    action: argocd:create-resources
+    input:
+      appName: ${{ parameters.component_id }}
+      # Hardcoded value because this is kept as a secret on the server to allow forks to easily change the value
+      argoInstance: openshift-gitops
+      namespace: ${{ parameters.component_id }}-dev
+      repoUrl: ${{ steps.publishGitops.output.remoteUrl }}
+      labelValue: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
+      path: manifests/base
+
   output:
     links:
       - title: Open the Source Code Repository
