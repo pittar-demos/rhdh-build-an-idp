@@ -4,4 +4,4 @@ resources:
 #  - ../openshift-pipelines
   - ../gitea/operator
   - ../gitea/instance
-  - ../rhdh/operator
+#  - ../rhdh/operator
