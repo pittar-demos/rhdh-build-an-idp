@@ -33,9 +33,6 @@ data:
         target: https://openshift-gitops-server-openshift-gitops.apps-crc.testing/api/v1/
         changeOrigin: true
         secure: false
-        headers:
-          Cookie:
-            $env: ${ARGOCD_AUTH_TOKEN}
 
     argocd:
       waitCycles: 25
