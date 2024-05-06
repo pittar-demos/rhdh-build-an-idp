@@ -28,12 +28,6 @@ data:
           username: developer
           password: openshift
 
-    proxy:
-      '/argocd/api':
-        target: https://openshift-gitops-server-openshift-gitops.apps-crc.testing/api/v1/
-        changeOrigin: true
-        secure: false
-
     argocd:
       waitCycles: 25
       secure: false
@@ -41,7 +35,7 @@ data:
         - type: 'config'
           instances:
             - name: openshift-gitops
-              url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
+              url: http://gitea.scm.svc.cluster.local:3000
               username: ${ARGOCD_ADMIN_USER}
               password: ${ARGOCD_ADMIN_PASSWORD}
 
