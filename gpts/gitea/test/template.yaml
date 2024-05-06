@@ -18,7 +18,8 @@ spec:
         - component_id
         - project_name
         - description
-        - owner 
+        - owner
+        - namespace
       properties:
         component_id:
           title: Name
@@ -41,6 +42,10 @@ spec:
           default: development
           enum:
             - development
+        namespace:
+          title: Namespace
+          type: string
+          description: Namespace base name
 
     - title: Configure the Git repository
       required:
@@ -127,7 +132,7 @@ spec:
       appName: ${{ parameters.component_id }}
       # Hardcoded value because this is kept as a secret on the server to allow forks to easily change the value
       argoInstance: openshift-gitops
-      namespace: ${{ parameters.component_id }}-dev
+      namespace: ${{ parameters.namespace }}-dev
       repoUrl: ${{ steps.publishGitops.output.remoteUrl }}
       labelValue: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
       path: manifests/base
