@@ -99,6 +99,7 @@ spec:
       url: ./skeletons/gitops
       targetPath: ./gitops
       values:
+        namespace: ${{ parameters.namespace }}
         host: ${{ (parameters.repo.host | parseRepoUrl).host }}
         repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
         repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
@@ -134,7 +135,7 @@ spec:
       namespace: ${{ parameters.namespace }}-dev
       repoUrl: ${{ steps.publishGitops.output.remoteUrl }}
       labelValue: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
-      path: manifests/base
+      path: manifests
 
   output:
     links:
