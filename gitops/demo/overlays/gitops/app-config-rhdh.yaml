@@ -31,6 +31,27 @@ data:
     argocd:
       waitCycles: 25
       secure: false
+      projectSettings:
+        # Sets the allowed destinations to all namespaces.
+        destinations:
+          - namespace: '*'
+            server: '*'
+        # Sets the allowed resources at the cluster level
+        clusterResourceWhitelist:
+          - group: '*'
+            kind: '*'
+        # Sets the blocked resources at the cluster level
+        clusterResourceBlacklist:
+          - group: '*'
+            kind: '*'
+        # Sets the allowed resources at the namespace level
+        namespaceResourceWhitelist:
+          - group: '*'
+            kind: '*'
+        # Sets the blocked resources at the namespace level
+        namespaceResourceBlacklist:
+          - group: '*'
+            kind: '*'
       appLocatorMethods:
         - type: 'config'
           instances:
