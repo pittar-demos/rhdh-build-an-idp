@@ -65,7 +65,6 @@ spec:
                   - redhat
                 allowedHosts:
                   - gitea-scm.apps-crc.testing
-                  - localhost
 
   steps:
   - action: fetch:template
