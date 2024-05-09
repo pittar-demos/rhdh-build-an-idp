@@ -3,9 +3,5 @@ namespace: rhdh
 resources:
   - ../../base
   - app-config-rhdh.yaml
-  - rhdh-config-rbac.yaml
-  - rhdh-config-rbac-policy.yaml
   - dynamic-plugins-rhdh.yaml
   - backstage.yaml
-# Group doesn't exist in 1.1
-#  - developer-group.yaml
