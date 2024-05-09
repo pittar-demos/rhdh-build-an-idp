@@ -1,4 +1,0 @@
-namespace: openshift-gitops
-
-resources:
-  - https://github.com/pittar-demos/demo-catalog/openshift-gitops-instances/argocd/openshift-gitops?ref=main

@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: openshift-gitops-instances/overlays/openshift-gitops
+    path: openshift-gitops-instances/overlays/openshift-gitops/instance
     repoURL: https://github.com/pittar-demos/demo-catalog.git
     targetRevision: main
   syncPolicy:

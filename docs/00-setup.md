@@ -14,7 +14,7 @@ An IDP is build on a solid foundation of tools and processes.  This means, we ne
 Let's install GitOps with the CLI... who wants to point-and-click anyway?
 
 ```
-oc apply -k https://github.com/redhat-cop/gitops-catalog/openshift-gitops-operator/operator/overlays/latest
+oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/gitops/setup/openshift-gitops/operator
 ```
 
 And once that is up and running, let's complete the setup with GitOps!
