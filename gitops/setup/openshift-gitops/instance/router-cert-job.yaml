@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  name: import-router-cert
+spec:
+  template:
+    spec:
+      containers:
+        - image: quay.io/pittar/toolkit:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Extract router default cert."
+
+              oc get secret router-certs-default \
+                -n openshift-ingress \
+                -o jsonpath="{.data['tls\.crt']}" | base64 -d \
+                > /tmp/tls.crt
+
+              echo "Create ConfigMap"
+
+              oc create cm argocd-tls-certs-cm \
+                --from-file=gitea-scm.apps-crc.testing=/tmp/tls.crt \
+                -n openshift-gitops \
+                --dry-run=client -o yaml \
+                > /tmp/cert-cm.yaml
+
+              oc apply -f /tmp/cert-cm.yaml \
+                -n openshift-gitops
+
+              echo "Done"
+          imagePullPolicy: Always
+          name: import-router-cert
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: openshift-gitops-argocd-application-controller
+      serviceAccountName: openshift-gitops-argocd-application-controller
+      terminationGracePeriodSeconds: 30
