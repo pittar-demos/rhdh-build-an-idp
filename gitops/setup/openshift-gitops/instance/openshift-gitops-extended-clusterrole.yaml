@@ -4,27 +4,7 @@ metadata:
   name: openshift-gitops-extended-clusterrole
 rules:
   - apiGroups:
-    - ""
-    resources:
-      - serviceaccounts
-      - resourcequotas
-      - limitranges
-    verbs:
-      - '*'
-  - apiGroups:
-    - "operator.tekton.dev"
-    resources:
-      - '*'
-    verbs:
-      - '*'
-  - apiGroups:
-    - "tekton.dev"
-    resources:
-      - '*'
-    verbs:
-      - '*'
-  - apiGroups:
-    - "route.openshift.io"
+    - "rhdh.redhat.com"
     resources:
       - '*'
     verbs:

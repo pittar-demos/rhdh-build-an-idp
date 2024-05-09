@@ -1,9 +1,9 @@
 namespace: openshift-gitops
 
 resources:
-#  - openshift-gitops-extended-clusterrolebinding.yaml
+  - openshift-gitops-extended-clusterrole.yaml
+  - openshift-gitops-extended-clusterrolebinding.yaml
   - openshift-gitops-admins-group.yaml
   - router-cert-job.yaml
   - gitea-repo-creds.yaml
   - argocd.yaml
-#  - openshift-gitops-extended-clusterrole.yaml
