@@ -25,8 +25,8 @@ data:
     integrations:
       gitea:
         - host: gitea-scm.apps-crc.testing
-          username: developer
-          password: openshift
+          username: ${GITEA_USERNAME}
+          password: ${GITEA_PASSWORD}
 
     argocd:
       waitCycles: 25
