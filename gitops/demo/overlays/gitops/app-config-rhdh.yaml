@@ -8,19 +8,19 @@ data:
       title: Super Duper IDP
       baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
 
-    signInPage: microsoft
+    # signInPage: microsoft
 
-    auth:
-      environment: production
-      providers:
-        microsoft:
-          production:
-            clientId: ${AZURE_CLIENT_ID}
-            clientSecret: ${AZURE_CLIENT_SECRET}
-            tenantId: ${AZURE_TENANT_ID}
-            domainHint: ${AZURE_TENANT_ID}
-            additionalScopes:
-              - Mail.Send
+    # auth:
+    #   environment: production
+    #   providers:
+    #     microsoft:
+    #       production:
+    #         clientId: ${AZURE_CLIENT_ID}
+    #         clientSecret: ${AZURE_CLIENT_SECRET}
+    #         tenantId: ${AZURE_TENANT_ID}
+    #         domainHint: ${AZURE_TENANT_ID}
+    #         additionalScopes:
+    #           - Mail.Send
 
     integrations:
       gitea:
@@ -32,10 +32,6 @@ data:
       waitCycles: 25
       secure: false
       projectSettings:
-        # Sets the allowed destinations to all namespaces.
-        destinations:
-          - namespace: '*'
-            server: '*'
         # Sets the allowed resources at the cluster level
         clusterResourceWhitelist:
           - group: '*'
