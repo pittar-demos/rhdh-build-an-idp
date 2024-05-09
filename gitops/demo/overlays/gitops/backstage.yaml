@@ -9,7 +9,6 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
         - name: app-config-rhdh
-        # - name: rhdh-config-rbac
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
       envs:
@@ -18,10 +17,6 @@ spec:
           value: "0"
       secrets:
         - name: rhdh-secrets
-    # extraFiles:
-    #   configMaps:
-    #     - name: rhdh-config-rbac-policy
-      # mountPath: /opt/app-root/src
     replicas: 1
     route:
       enabled: true
