@@ -8,20 +8,6 @@ data:
       title: Super Duper IDP
       baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
 
-    # signInPage: microsoft
-
-    # auth:
-    #   environment: production
-    #   providers:
-    #     microsoft:
-    #       production:
-    #         clientId: ${AZURE_CLIENT_ID}
-    #         clientSecret: ${AZURE_CLIENT_SECRET}
-    #         tenantId: ${AZURE_TENANT_ID}
-    #         domainHint: ${AZURE_TENANT_ID}
-    #         additionalScopes:
-    #           - Mail.Send
-
     integrations:
       gitea:
         - host: gitea-scm.apps-crc.testing

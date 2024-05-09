@@ -1,4 +1,4 @@
-# Install Red Hat Developer Hub (Backstage)
+# 1. Install Red Hat Developer Hub (Backstage)
 
 The Red Hat Developer Hub **Operator** was installed as part of the GitOps setup.  This section concentrates on deploying and configuring your *instance* of Red Hat Developer Hub.
 
@@ -42,4 +42,4 @@ When the pods have started up (both circles are dark blue), you can click on the
 
 Next, we will configure login with Entra ID (formerly Azure AD).
 
-[2: Configuring Authentication with Azure Entra ID](02-azure-entraid-config.md)
+[2: Golden Path Templates](02-gpts.md)

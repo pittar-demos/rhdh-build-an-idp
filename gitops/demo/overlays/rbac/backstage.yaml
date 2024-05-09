@@ -9,11 +9,18 @@ spec:
       mountPath: /opt/app-root/src
       configMaps:
         - name: app-config-rhdh
+        - name: rhdh-config-rbac
     dynamicPluginsConfigMapName: dynamic-plugins-rhdh
     extraEnvs:
+      envs:
+        # Only needed because gitea uses a self-signed cert.
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
       secrets:
         - name: rhdh-secrets
     extraFiles:
+      configMaps:
+        - name: rhdh-config-rbac-policy
       mountPath: /opt/app-root/src
     replicas: 1
     route:

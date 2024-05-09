@@ -3,5 +3,4 @@ namespace: rhdh
 resources:
   - ../../base
   - app-config-rhdh.yaml
-  - dynamic-plugins-rhdh.yaml
   - backstage.yaml
