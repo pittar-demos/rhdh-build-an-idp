@@ -18,5 +18,5 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
         disabled: false
-      # - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-dynamic
-      #   disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes
+        disabled: false
