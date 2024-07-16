@@ -101,11 +101,13 @@ spec:
 
 ## Update Red Hat Developer Hub
 
-To update Developer Hub, log into Argo CD and: 
-* Open the `rhdh-instance` Application.
-* Click the **Edit** button.
-* Update the git path to end with `gpts` instead of `basic`.
-* Click **Save**.
+Of course... we will update Developer Hub by updating the Argo CD `Application`!
+
+'''
+oc apply -k \
+    https://github.com/pittar-demos/rhdh-build-an-idp/gitops/demo/argocd/rhdh-instance/gpts \
+    -n openshift-gitops
+'''
 
 Since the Backstage CRD has been update, the update should automatically roll out.  If for some reason you don't see your Backstage pod cycling, then you may need to manually delete it.  It will take a few minutes for the new pod to spin up.
 

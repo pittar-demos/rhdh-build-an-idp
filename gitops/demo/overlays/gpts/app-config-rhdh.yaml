@@ -8,6 +8,11 @@ data:
       title: Super Duper IDP
       baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
 
+    auth:
+      providers:
+        guest:
+          dangerouslyAllowOutsideDevelopment: true
+
     integrations:
       gitea:
         - host: gitea-scm.apps-crc.testing
