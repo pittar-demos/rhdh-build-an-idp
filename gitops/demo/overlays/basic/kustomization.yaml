@@ -2,4 +2,5 @@ namespace: rhdh
 
 resources:
   - ../../base
+  - app-config-rhdh.yaml
   - backstage.yaml
