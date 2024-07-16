@@ -30,6 +30,8 @@ This will:
 
 This will take a few minutes to complete.  When you see Gitea (in the `scm` namespace) is up and running, you can continue on to the next step.
 
+**NOTE:** If things seem stuck, log in to your new OpenShift GitOps instance and see if any of the apps need a manual "Sync".
+
 Your base configuration is now in place and you're ready to start deploying and configuring your Internal Developer Platform!
 
 [1: Basic Red Hat Developer Hub Installation](01-rhdh-basic-install.md)
