@@ -16,7 +16,7 @@ data:
         disabled: false
       - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
         disabled: false
-      - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-dynamic
-        disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-backend-dynamic
         disabled: false
+      # - package: ./dynamic-plugins/dist/backstage-plugin-kubernetes-dynamic
+      #   disabled: false
