@@ -18,6 +18,8 @@ spec:
   application:
     appConfig:
       mountPath: /opt/app-root/src
+      configMaps:
+        - name: app-config-rhdh
     extraFiles:
       mountPath: /opt/app-root/src
     replicas: 1
@@ -28,6 +30,8 @@ spec:
 ```
 
 This will create a Backstage instance as well as a PostgreSQL database.  Of course, we will deploy this with GitOps :)
+
+We will not focus on the `ConfigMap` that is created right now, we'll get to that in the next step.
 
 ```
 oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/gitops/demo/argocd/rhdh-instance/basic -n openshift-gitops
