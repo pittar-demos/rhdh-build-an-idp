@@ -85,3 +85,5 @@ data:
     enabled:
       argocd: true
       gitea: true
+      techdocs: true
+      kubernetes: true
