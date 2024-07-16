@@ -30,7 +30,7 @@ spec:
 This will create a Backstage instance as well as a PostgreSQL database.  Of course, we will deploy this with GitOps :)
 
 ```
-oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/gitops/demo/argocd/rhdh-instance -n openshift-gitops
+oc apply -k https://github.com/pittar-demos/rhdh-build-an-idp/gitops/demo/argocd/rhdh-instance/basic -n openshift-gitops
 ```
 
 If you're already logged into the Argo CD user interface, you can watch the Backstage deployment roll out.
@@ -40,6 +40,6 @@ You can also go to the `rhdh` namespace and watch the pods spin up:
 
 When the pods have started up (both circles are dark blue), you can click on the route to go to your Red Hat Developer Hub UI!  It should be available at [https://backstage-developer-hub-rhdh.apps-crc.testing/](https://backstage-developer-hub-rhdh.apps-crc.testing/).
 
-Next, we will configure login with Entra ID (formerly Azure AD).
+Next, we will configure add some configuration to make Developer Hub more useful!
 
 [2: Golden Path Templates](02-gpts.md)

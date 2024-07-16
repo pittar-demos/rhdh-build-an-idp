@@ -29,5 +29,5 @@ data:
       cors:
         origin: https://backstage-developer-hub-rhdh.apps-crc.testing
 
-    enabled:
-      gitea: true
+    # enabled:
+    #   gitea: true
