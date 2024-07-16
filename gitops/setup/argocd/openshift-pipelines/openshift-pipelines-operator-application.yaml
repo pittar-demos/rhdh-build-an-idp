@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: openshift-pipelines-operator/overlays/pipelines-1.12
+    path: openshift-pipelines-operator/overlays/latest
     repoURL: https://github.com/pittar-demos/demo-catalog.git
     targetRevision: main
   syncPolicy:

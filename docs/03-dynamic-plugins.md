@@ -70,6 +70,9 @@ oc create secret generic rhdh-secrets  \
     --from-literal=GITEA_PASSWORD=openshift \
     --from-literal=ARGOCD_ADMIN_USER=admin \
     --from-literal=ARGOCD_ADMIN_PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) \
+    --from-literal=K8S_CLUSTER_NAME=openshiftlocal \
+    --from-literal=K8S_CLUSTER_URL=https://api.crc.testing:6443 \
+    --from-literal=K8S_CLUSTER_TOKEN=(oc get secret default-token -n rhdh -o jsonpath="{.data['token']}" | base64 -d)
     -n rhdh
 ```
 
