@@ -62,6 +62,7 @@ data:
             serviceAccountToken: ${K8S_CLUSTER_TOKEN}
             url: ${K8S_CLUSTER_URL}
             skipTLSVerify: true
+            skipMetricsLookup: true
           type: config
       customResources:
         - group: 'tekton.dev'
