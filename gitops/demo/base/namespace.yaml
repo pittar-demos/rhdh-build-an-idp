@@ -3,4 +3,6 @@ kind: Namespace
 metadata:
   annotations:
     openshift.io/display-name: "Red Hat Developer Hub"
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
   name: rhdh
