@@ -105,7 +105,13 @@ Finally, you will need to update the `Backstage` CRD again so that the operator 
 
 ## Update Red Hat Developer Hub
 
-Just like last time, log into Argo CD and update your `rhdh-instance` Application.
+Just like last time, log into Argo CD and update your `rhdh-instance` Application... with GitOps!
+
+```
+oc apply -k \
+    https://github.com/pittar-demos/rhdh-build-an-idp/gitops/demo/argocd/rhdh-instance/plugins \
+    -n openshift-gitops
+```
 
 This time, update the path to end in `gitops` instead of `gpts`.
 
