@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{values.component_id}}
+  {%- if values.description %}
+  description: ${{values.description}}
+  {%- endif %}
+  annotations:
+    backstage.io/source-location: url:https://${{values.host}}/${{values.repo_owner}}/${{values.repo_name}}
+    argocd/app-name: ${{values.component_id}}
+    backstage.io/kubernetes-id: ${{values.component_id}}
+    janus-idp.io/tekton: ${{values.component_id}}
+  tags:
+    - java
+    - quarkus
+  links:
+    - url: https://www.redhat.com/en/blog/channel/hybrid-cloud-infrastructure
+      title: Red Hat Blog
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: ${{values.owner | dump}}

@@ -1,0 +1,10 @@
+namespace: ${{values.namespace }}-dev
+
+resources:
+  - namespace.yaml
+  - deployment.yaml
+
+images:
+  - name: ${{values.component_id}}
+    newName: quay.io/pittar/petclinic
+    newTag: metrics

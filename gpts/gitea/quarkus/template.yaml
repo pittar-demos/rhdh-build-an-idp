@@ -1,0 +1,159 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: quarkus-postgres
+  title: Create a Quarkus/Postgres Application
+  description: Quarkus starter with Panache and configuration for PostgreSQL and H2 databases.
+  tags:
+    - quarkus
+    - postgres
+    - h2
+    - java
+    - maven
+spec:
+  owner: guests
+  type: service
+
+  parameters:
+    - title: Provide information for the Quarkus Application
+      required:
+        - component_id
+        - project_name
+        - description
+        - group_id
+        - artifact_id
+        - owner
+        - namespace
+      properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          default: my-demo-app
+          ui:field: EntityNamePicker
+        project_name:
+          title: Name
+          type: string
+          description: Project name
+        description:
+          title: Description
+          type: string
+          description: Project description
+        group_id:
+          title: Group ID (Java)
+          type: string
+          description: Group ID for the application.
+        artifact_id:
+          title: Artifact ID (Java)
+          type: string
+          description: Artifact ID of the application.
+        owner:
+          title: Repo Owner
+          type: string
+          description: Your SCM host organization/group
+          default: development
+          enum:
+            - development
+        namespace:
+          title: Namespace
+          type: string
+          description: Namespace base name
+
+    - title: Configure the Git repository
+      required:
+        - repo
+      properties:
+        repo:
+          title: Repository Location
+          type: object
+          properties:
+            host:
+              title: Repo Host
+              type: string
+              ui:field: RepoUrlPicker
+              ui:options:
+                allowedOwners:
+                  - redhat
+                allowedHosts:
+                  - gitea-scm.apps-crc.testing
+
+  steps:
+  - action: fetch:template
+    id: fetchTemplateSource
+    name: Fetch source template
+    input:
+      url: ./skeletons/source
+      targetPath: ./source
+      values:
+        host: ${{ (parameters.repo.host | parseRepoUrl).host }}
+        repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
+        repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}
+        component_id: ${{ parameters.component_id }}
+        name: ${{ parameters.component_id }}
+        owner: ${{ parameters.owner }}
+        description: This is a quarkus project
+          
+  - action: publish:gitea
+    id: publishSource
+    name: Publishing to a gitea source repository
+    input:
+      description: This is ${{ parameters.component_id }}
+      repoUrl: ${{ parameters.repo.host }}
+      defaultBranch: main
+      repoVisibility: private
+      sourcePath: ./source
+
+  - action: fetch:template
+    id: fetchTemplateGitops
+    name: Fetch gitops template
+    input:
+      url: ./skeletons/gitops
+      targetPath: ./gitops
+      values:
+        namespace: ${{ parameters.namespace }}
+        host: ${{ (parameters.repo.host | parseRepoUrl).host }}
+        repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
+        repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
+        component_id: ${{ parameters.component_id }}
+        name: ${{ parameters.component_id }}
+        owner: ${{ parameters.owner }}
+        description: This is a dummy project
+          
+  - action: publish:gitea
+    id: publishGitops
+    name: Publishing to a gitea gitops repository
+    input:
+      description: This is ${{ parameters.component_id }}
+      repoUrl: ${{ parameters.repo.host }}-gitops
+      defaultBranch: main
+      repoVisibility: private
+      sourcePath: ./gitops
+
+  - action: catalog:register
+    id: register
+    name: Register
+    input:
+      repoContentsUrl: ${{ steps.publishSource.output.repoContentsUrl }}
+      catalogInfoPath: catalog-info.yaml
+
+  - id: createArgocdResources
+    name: Create the ArgoCD Resources
+    action: argocd:create-resources
+    input:
+      appName: ${{ parameters.component_id }}
+      # Hardcoded value because this is kept as a secret on the server to allow forks to easily change the value
+      argoInstance: openshift-gitops
+      namespace: ${{ parameters.namespace }}-dev
+      repoUrl: ${{ steps.publishGitops.output.remoteUrl }}
+      labelValue: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
+      path: manifests
+
+  output:
+    links:
+      - title: Open the Source Code Repository
+        url: ${{ steps.publishSource.output.remoteUrl }}
+      - title: Open the GitOps Repository
+        url: ${{ steps.publishGitops.output.remoteUrl }}
+      - title: Open the Catalog Info Component
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
