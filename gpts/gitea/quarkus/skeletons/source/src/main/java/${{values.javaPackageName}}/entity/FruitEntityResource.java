@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-import ${{values.groupId}}.${{values.artifactId}}.Fruit;
+import ${{values.groupId}}.${{values.artifactId}}.repository.Fruit;
 import org.jboss.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
