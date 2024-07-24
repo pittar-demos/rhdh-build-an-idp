@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ${{values.component_id}}
-    app.kubernetes.io/component: ${{values.component_id}}
-    app.kubernetes.io/instance: ${{values.component_id}}
-    app.kubernetes.io/part-of: ${{values.component_id}}
-    backstage.io/kubernetes-id: ${{values.component_id}}
+    app: ${{values.componentId}}
+    app.kubernetes.io/component: ${{values.componentId}}
+    app.kubernetes.io/instance: ${{values.componentId}}
+    app.kubernetes.io/part-of: ${{values.componentId}}
+    backstage.io/kubernetes-id: ${{values.componentId}}
   name: ${{values.namespace}}
 spec:
   progressDeadlineSeconds: 600
@@ -14,7 +14,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: ${{values.component_id}}
+      app: ${{values.componentId}}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -23,14 +23,14 @@ spec:
   template:
     metadata:
       labels:
-        app: ${{values.component_id}}
-        deploymentconfig: ${{values.component_id}}
-        backstage.io/kubernetes-id: ${{values.component_id}}
+        app: ${{values.componentId}}
+        deploymentconfig: ${{values.componentId}}
+        backstage.io/kubernetes-id: ${{values.componentId}}
     spec:
       containers:
-      - image: ${{values.component_id}}:latest
+      - image: ${{values.componentId}}:latest
         imagePullPolicy: Always
-        name: ${{values.component_id}}
+        name: ${{values.componentId}}
         resources:
           limits:
             memory: 512Mi

@@ -1,15 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.component_id}}
+  name: ${{values.componentId}}
   {%- if values.description %}
   description: ${{values.description}}
   {%- endif %}
   annotations:
     backstage.io/source-location: url:https://${{values.host}}/${{values.repo_owner}}/${{values.repo_name}}
-    argocd/app-name: ${{values.component_id}}
-    backstage.io/kubernetes-id: ${{values.component_id}}
-    janus-idp.io/tekton: ${{values.component_id}}
+    argocd/app-name: ${{values.componentId}}
+    backstage.io/kubernetes-id: ${{values.componentId}}
+    janus-idp.io/tekton: ${{values.componentId}}
   tags:
     - java
     - quarkus

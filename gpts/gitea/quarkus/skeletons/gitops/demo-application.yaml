@@ -5,15 +5,15 @@ metadata:
   labels:
     gitops.ownedBy: gitops
     category: apps
-  name: ${{values.component_id}}
+  name: ${{values.componentId}}
 spec:
   destination:
-    namespace: ${{values.component_id}}
+    namespace: ${{values.componentId}}
     server: https://kubernetes.default.svc
   project: default
   source:
     path: /
-    repoURL: http://gitea.scm.svc.cluster.local:3000/${{values.repo_owner}}/${{values.component_id}}-gitops.git
+    repoURL: http://gitea.scm.svc.cluster.local:3000/${{values.repo_owner}}/${{values.componentId}}-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
