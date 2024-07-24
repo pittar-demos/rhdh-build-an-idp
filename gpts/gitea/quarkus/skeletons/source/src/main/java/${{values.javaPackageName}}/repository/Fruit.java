@@ -1,4 +1,4 @@
-package ${{values.group_id}}.${{values.artifact_id}}.repository;
+package ${{values.groupId}}.${{values.artifactId}}.repository;
 
 import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;

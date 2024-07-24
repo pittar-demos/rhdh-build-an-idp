@@ -1,4 +1,4 @@
-package ${{values.group_id}}.${{values.artifact_id}};
+package ${{values.groupId}}.${{values.artifactId}};
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;

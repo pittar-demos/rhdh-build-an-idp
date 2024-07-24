@@ -17,36 +17,39 @@ spec:
   parameters:
     - title: Provide information for the Quarkus Application
       required:
-        - component_id
-        - project_name
+        - componentId
         - description
-        - group_id
-        - artifact_id
+        - groupId
+        - artifactId
+        - javaPackageName
         - owner
         - namespace
       properties:
-        component_id:
+        componentId:
           title: Name
           type: string
-          description: Unique name of the component
+          description: Unique name of the Project
           default: my-demo-app
           ui:field: EntityNamePicker
-        project_name:
-          title: Name
-          type: string
-          description: Project name
         description:
           title: Description
           type: string
           description: Project description
-        group_id:
-          title: Group ID (Java)
+        groupId:
+          title: Group ID
           type: string
-          description: Group ID for the application.
-        artifact_id:
-          title: Artifact ID (Java)
+          default: ca.pitt.demo.idp
+          description: Maven Group ID eg (ca.pitt.demo)
+        artifactId:
+          title: Artifact ID
           type: string
-          description: Artifact ID of the application.
+          default: my-quarkus-app
+          description: Maven Artifact ID
+        javaPackageName:
+          title: Java Package Namespace
+          type: string
+          default: ca/pitt/demo/idp/my-quarkus-app
+          description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID and Artifact ID
         owner:
           title: Repo Owner
           type: string
@@ -88,8 +91,11 @@ spec:
         host: ${{ (parameters.repo.host | parseRepoUrl).host }}
         repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
         repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}
-        component_id: ${{ parameters.component_id }}
-        name: ${{ parameters.component_id }}
+        componentId: ${{ parameters.componentId }}
+        groupId: ${{ parameters.groupId }}
+        artifactId: ${{ parameters.artifactId }}
+        javaPackageName: ${{ parameters.javaPackageName }}
+        name: ${{ parameters.componentId }}
         owner: ${{ parameters.owner }}
         description: This is a quarkus project
           
@@ -97,7 +103,7 @@ spec:
     id: publishSource
     name: Publishing to a gitea source repository
     input:
-      description: This is ${{ parameters.component_id }}
+      description: This is ${{ parameters.componentId }}
       repoUrl: ${{ parameters.repo.host }}
       defaultBranch: main
       repoVisibility: private
@@ -114,8 +120,8 @@ spec:
         host: ${{ (parameters.repo.host | parseRepoUrl).host }}
         repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
         repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
-        component_id: ${{ parameters.component_id }}
-        name: ${{ parameters.component_id }}
+        componentId: ${{ parameters.componentId }}
+        name: ${{ parameters.componentId }}
         owner: ${{ parameters.owner }}
         description: This is a dummy project
           
@@ -123,7 +129,7 @@ spec:
     id: publishGitops
     name: Publishing to a gitea gitops repository
     input:
-      description: This is ${{ parameters.component_id }}
+      description: This is ${{ parameters.componentId }}
       repoUrl: ${{ parameters.repo.host }}-gitops
       defaultBranch: main
       repoVisibility: private
@@ -140,7 +146,7 @@ spec:
     name: Create the ArgoCD Resources
     action: argocd:create-resources
     input:
-      appName: ${{ parameters.component_id }}
+      appName: ${{ parameters.componentId }}
       # Hardcoded value because this is kept as a secret on the server to allow forks to easily change the value
       argoInstance: openshift-gitops
       namespace: ${{ parameters.namespace }}-dev

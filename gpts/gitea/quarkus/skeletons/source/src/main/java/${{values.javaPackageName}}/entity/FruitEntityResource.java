@@ -1,4 +1,4 @@
-package ${{values.group_id}}.${{values.artifact_id}}.entity;
+package ${{values.groupId}}.${{values.artifactId}}.entity;
 
 import java.util.List;
 
