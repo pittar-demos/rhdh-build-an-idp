@@ -4,7 +4,7 @@ metadata:
   name: gitea-creds
   annotations:
     argocd.argoproj.io/sync-wave: "1"
-    tekton.dev/git-0: https://gitea-scm.apps-crc.testing/redhat/${{parameters.componentId}}.git
+    tekton.dev/git-0: https://gitea-scm.apps-crc.testing/redhat/${{values.componentId}}.git
 type: kubernetes.io/basic-auth
 stringData:
   username: developer

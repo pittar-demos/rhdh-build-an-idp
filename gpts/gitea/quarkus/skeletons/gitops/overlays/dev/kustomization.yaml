@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: ${{values.componentId}}
-    newName: image-registry.openshift-image-registry.svc:5000/${{parameters.namespace}}-cicd/${{parameters.componentId}}
+    newName: image-registry.openshift-image-registry.svc:5000/${{values.namespace}}-cicd/${{values.componentId}}
     newTag: dev
