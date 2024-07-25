@@ -4,14 +4,19 @@ metadata:
   name: build-app
 spec:
   params:
-    - description: Image URL
-      name: image_dest_url
-      type: string
+    - default: 'http://gitea.scm.svc.cluster.local:3000/redhat/${{parameters.componentId}}.git'
+      description: Source repository url.
+      name: git-repo-url
+      type: string                                 
+    - name: image-dest-url                                                                        
+      type: string                                                                                                                             
+      description: External registry location to copy image to
+      default: image-registry.openshift-image-registry.svc:5000/${{parameters.namespace}}/${{parameters.componentId}}
   tasks:
     - name: git-clone
       params:
         - name: url
-          value: 'https://gitea-scm.apps-crc.testing/redhat/${{parameters.componentId}}.git'
+          value: '$(params.git-repo-url):latest'
         - name: revision
           value: ''
         - name: sslVerify
@@ -49,7 +54,7 @@ spec:
     - name: buildah
       params:
         - name: IMAGE
-          value: '$(params.image_dest_url):latest'
+          value: '$(params.image-dest-url):latest'
         - name: BUILDER_IMAGE
           value: 'registry.redhat.io/rhel8/buildah:latest'
         - name: STORAGE_DRIVER
@@ -73,9 +78,9 @@ spec:
     - name: skopeo-copy
       params:
         - name: srcImageURL
-          value: 'docker://$(params.image_dest_url):latest'
+          value: 'docker://$(params.image-dest-url):latest'
         - name: destImageURL
-          value: 'docker://$(params.image_dest_url):dev'
+          value: 'docker://$(params.image-dest-url):dev'
         - name: srcTLSverify
           value: 'false'
         - name: destTLSverify
@@ -91,9 +96,9 @@ spec:
     - name: skopeo-copy-qa
       params:
         - name: srcImageURL
-          value: 'docker://$(params.image_dest_url):latest'
+          value: 'docker://$(params.image-dest-url):latest'
         - name: destImageURL
-          value: 'docker://$(params.image_dest_url):qa'
+          value: 'docker://$(params.image-dest-url):qa'
         - name: srcTLSverify
           value: 'false'
         - name: destTLSverify
