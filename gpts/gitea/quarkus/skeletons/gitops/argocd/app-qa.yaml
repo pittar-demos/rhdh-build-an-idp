@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: ${{values.componentId}}-qa
     server: https://kubernetes.default.svc
-  project: ${{values.componentId}}-qa
+  project: ${{values.componentId}}
   source:
     path: overlays/qa
     repoURL: https://gitea-scm.apps-crc.testing/${{values.repo_owner}}/${{values.componentId}}-gitops.git
