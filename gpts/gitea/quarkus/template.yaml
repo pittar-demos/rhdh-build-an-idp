@@ -149,10 +149,10 @@ spec:
       appName: ${{ parameters.componentId }}
       # Hardcoded value because this is kept as a secret on the server to allow forks to easily change the value
       argoInstance: openshift-gitops
-      namespace: ${{ parameters.namespace }}-dev
+      namespace: '*'
       repoUrl: ${{ steps.publishGitops.output.remoteUrl }}
       labelValue: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
-      path: manifests
+      path: argocd
 
   output:
     links:

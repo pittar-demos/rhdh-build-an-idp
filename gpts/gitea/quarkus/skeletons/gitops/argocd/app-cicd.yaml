@@ -12,8 +12,8 @@ spec:
     server: https://kubernetes.default.svc
   project: ${{values.componentId}}
   source:
-    path: /overlays/cicd
-    repoURL: http://gitea.scm.svc.cluster.local:3000/${{values.repo_owner}}/${{values.componentId}}-gitops.git
+    path: overlays/cicd
+    repoURL: https://gitea-scm.apps-crc.testing/${{values.repo_owner}}/${{values.componentId}}-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
