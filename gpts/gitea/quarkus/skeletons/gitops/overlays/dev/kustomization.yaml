@@ -2,7 +2,7 @@ namespace: ${{values.namespace}}-dev
 
 resources:
   - namespace.yaml
-  - ../../base
+  - ../../../base
 
 images:
   - name: ${{values.componentId}}

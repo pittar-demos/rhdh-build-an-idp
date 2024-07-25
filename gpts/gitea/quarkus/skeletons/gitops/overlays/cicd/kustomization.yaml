@@ -3,4 +3,4 @@ namespace: ${{values.namespace}}-cicd
 resources:
   - namespace.yaml
   - workspace-pvc.yaml
-  - ../../base
+  - cicd-pipeline.yaml
