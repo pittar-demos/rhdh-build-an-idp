@@ -1,5 +1,7 @@
 resources:
-  - deployment.yaml
+  - app-deployment.yaml
+  - app-svc.yaml
+  - app-route.yaml
 
 images:
   - name: ${{values.componentId}}
