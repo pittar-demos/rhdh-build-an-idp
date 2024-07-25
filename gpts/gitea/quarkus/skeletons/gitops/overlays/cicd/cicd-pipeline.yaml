@@ -1,6 +1,8 @@
 apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
+  labels:
+    backstage.io/kubernetes-id: ${{values.componentId}}
   name: build-app
 spec:
   params:
