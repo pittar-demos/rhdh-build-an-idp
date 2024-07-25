@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: ${{values.componentId}}
-    newName: quay.io/pittar/petclinic
-    newTag: metrics
+    newName: image-registry.openshift-image-registry.svc:5000/${{parameters.namespace}}-cicd/${{parameters.componentId}}
+    newTag: dev
