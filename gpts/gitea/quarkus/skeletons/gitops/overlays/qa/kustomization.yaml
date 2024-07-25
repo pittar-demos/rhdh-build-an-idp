@@ -2,7 +2,7 @@ namespace: ${{values.namespace}}-qa
 
 resources:
   - namespace.yaml
-  - ../../../base
+  - ../../base
 
 images:
   - name: ${{values.componentId}}
