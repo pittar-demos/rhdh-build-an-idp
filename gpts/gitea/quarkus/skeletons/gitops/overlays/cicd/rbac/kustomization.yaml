@@ -1,0 +1,5 @@
+resources:
+  - gitea-creds.yaml
+  - pipeline-sa.yaml
+  - pipeline-admin-rolebinding.yaml
+  - image-puller-rolebinding.yaml

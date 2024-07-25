@@ -7,7 +7,7 @@ spec:
     - name: git-repo-url
       type: string
       description: Source repository url.
-      default: 'http://gitea.scm.svc.cluster.local:3000/redhat/${{parameters.componentId}}.git'                                 
+      default: 'https://gitea-scm.apps-crc.testing/redhat/${{parameters.componentId}}.git'                                 
     - name: image-dest-url                                                                        
       type: string                                                                                                                             
       description: External registry location to copy image to

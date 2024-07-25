@@ -2,5 +2,6 @@ namespace: ${{values.namespace}}-cicd
 
 resources:
   - namespace.yaml
+  - rbac
   - workspace-pvc.yaml
   - cicd-pipeline.yaml
