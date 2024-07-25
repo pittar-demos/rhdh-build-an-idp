@@ -3,16 +3,16 @@ kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
   labels:
-    gitops.ownedBy: gitops
+    gitops.ownedBy: openshift-gitops
     category: apps
-  name: ${{values.componentId}}
+  name: ${{values.componentId}}-dev
 spec:
   destination:
-    namespace: ${{values.componentId}}
+    namespace: ${{values.componentId}}-dev
     server: https://kubernetes.default.svc
-  project: default
+  project: ${{values.componentId}}
   source:
-    path: /
+    path: /overlays/dev
     repoURL: http://gitea.scm.svc.cluster.local:3000/${{values.repo_owner}}/${{values.componentId}}-gitops.git
     targetRevision: main
   syncPolicy:

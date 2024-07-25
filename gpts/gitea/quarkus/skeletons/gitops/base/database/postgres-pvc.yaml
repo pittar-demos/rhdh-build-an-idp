@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: ${{values.componentId}}-postgresql
+    app.openshift.io/runtime: postgresql
+    app.kubernetes.io/component: ${{values.componentId}}-postgresql
+    app.kubernetes.io/instance: ${{values.componentId}}-postgresql
+    app.kubernetes.io/part-of: ${{values.componentId}}
+    backstage.io/kubernetes-id: ${{values.componentId}}
+  name: postgresql
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+

@@ -1,8 +1,8 @@
-namespace: ${{values.namespace }}-dev
+namespace: ${{values.namespace}}-dev
 
 resources:
   - namespace.yaml
-  - deployment.yaml
+  - ../../base
 
 images:
   - name: ${{values.componentId}}

@@ -1,0 +1,6 @@
+namespace: openshift-gitops
+
+resources:
+  - app-cicd.yaml
+  - app-dev.yaml
+  - app-qa.yaml

@@ -1,0 +1,7 @@
+resources:
+  - deployment.yaml
+
+images:
+  - name: ${{values.componentId}}
+    newName: quay.io/pittar/petclinic
+    newTag: metrics

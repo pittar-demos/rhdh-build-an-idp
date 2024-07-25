@@ -1,0 +1,110 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: build-app
+spec:
+  params:
+    - description: Image URL
+      name: image_dest_url
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: 'https://gitea-scm.apps-crc.testing/redhat/${{parameters.componentId}}.git'
+        - name: revision
+          value: ''
+        - name: sslVerify
+          value: 'false'
+        - name: deleteExisting
+          value: 'true'
+        - name: userHome
+          value: /home/git
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: workspace
+    - name: maven
+      params:
+        - name: MAVEN_IMAGE
+          value: 'registry.redhat.io/ubi8/openjdk-17:latest'
+        - name: GOALS
+          value:
+            - clean
+            - package
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: workspace
+        - name: maven-settings
+          workspace: workspace
+    - name: buildah
+      params:
+        - name: IMAGE
+          value: '$(params.image_dest_url):latest'
+        - name: BUILDER_IMAGE
+          value: 'registry.redhat.io/rhel8/buildah:latest'
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: DOCKERFILE
+          value: ./Containerfile
+        - name: CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'false'
+        - name: FORMAT
+          value: oci
+      runAfter:
+        - maven
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: skopeo-copy
+      params:
+        - name: srcImageURL
+          value: 'docker://$(params.image_dest_url):latest'
+        - name: destImageURL
+          value: 'docker://$(params.image_dest_url):dev'
+        - name: srcTLSverify
+          value: 'false'
+        - name: destTLSverify
+          value: 'false'
+      runAfter:
+        - buildah
+      taskRef:
+        kind: ClusterTask
+        name: skopeo-copy
+      workspaces:
+        - name: images-url
+          workspace: workspace
+    - name: skopeo-copy-qa
+      params:
+        - name: srcImageURL
+          value: 'docker://$(params.image_dest_url):latest'
+        - name: destImageURL
+          value: 'docker://$(params.image_dest_url):qa'
+        - name: srcTLSverify
+          value: 'false'
+        - name: destTLSverify
+          value: 'false'
+      runAfter:
+        - buildah
+      taskRef:
+        kind: ClusterTask
+        name: skopeo-copy
+      workspaces:
+        - name: images-url
+          workspace: workspace
+  workspaces:
+    - name: workspace

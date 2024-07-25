@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ${{values.componentId}}
+    app.openshift.io/runtime: quarkus
+    app.kubernetes.io/component: ${{values.componentId}}
+    app.kubernetes.io/instance: ${{values.componentId}}
+    app.kubernetes.io/part-of: ${{values.componentId}}
+    backstage.io/kubernetes-id: ${{values.componentId}}
+  name: ${{values.componentId}}
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: 8443-tcp
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    app: ${{values.componentId}}
+    deployment: ${{values.componentId}}
+  sessionAffinity: None
+  type: ClusterIP
+

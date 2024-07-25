@@ -1,0 +1,5 @@
+resources:
+  - postgres-pvc.yaml
+  - postgres-secret.yaml
+  - postgres-deploy.yaml
+  - postgres-svc.yaml

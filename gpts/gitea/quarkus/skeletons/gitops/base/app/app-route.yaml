@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: ${{values.componentId}}
+    app.openshift.io/runtime: quarkus
+    app.kubernetes.io/component: ${{values.componentId}}
+    app.kubernetes.io/instance: ${{values.componentId}}
+    app.kubernetes.io/part-of: ${{values.componentId}}
+    backstage.io/kubernetes-id: ${{values.componentId}}
+  name: ${{values.componentId}}
+spec:
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: ${{values.componentId}}
+    weight: 100
+  wildcardPolicy: None

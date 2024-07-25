@@ -3,11 +3,12 @@ kind: Deployment
 metadata:
   labels:
     app: ${{values.componentId}}
+    app.openshift.io/runtime: quarkus
     app.kubernetes.io/component: ${{values.componentId}}
     app.kubernetes.io/instance: ${{values.componentId}}
     app.kubernetes.io/part-of: ${{values.componentId}}
     backstage.io/kubernetes-id: ${{values.componentId}}
-  name: ${{values.namespace}}
+  name: ${{values.componentId}}
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
