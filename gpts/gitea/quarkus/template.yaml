@@ -43,12 +43,12 @@ spec:
         artifactId:
           title: Artifact ID
           type: string
-          default: my-quarkus-app
+          default: quarkusapp
           description: Maven Artifact ID
         javaPackageName:
           title: Java Package Namespace
           type: string
-          default: ca/pitt/demo/idp/my-quarkus-app
+          default: ca/pitt/demo/idp/quarkusapp
           description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID and Artifact ID
         owner:
           title: Repo Owner
