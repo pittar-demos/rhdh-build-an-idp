@@ -4,6 +4,7 @@ metadata:
   labels:
     backstage.io/kubernetes-id: ${{values.componentId}}
   name: build-app
+  namespace: ${{values.namespace}}-cicd
 spec:
   params:
     - name: git-repo-url

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: gitea-creds
+  namespace: ${{values.namespace}}-cicd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
     tekton.dev/git-0: https://gitea-scm.apps-crc.testing/redhat/${{values.componentId}}.git
