@@ -36,11 +36,20 @@ spec:
           name: ${{values.componentId}}
           env:
             - name: quarkus.datasource.username
-              value: quarkus
+              valueFrom:
+                secretKeyRef:
+                  key: database-user
+                  name: postgresql
             - name: quarkus.datasource.password
-              value: quarkus
+              valueFrom:
+                secretKeyRef:
+                  key: database-password
+                  name: postgresql
             - name: quarkus.datasource.jdbc.url
-              value: jdbc:postgresql://postgresql:5432/quarkusdb
+              valueFrom:
+                secretKeyRef:
+                  key: database-url
+                  name: postgresql
           resources:
             limits:
               memory: 512Mi
