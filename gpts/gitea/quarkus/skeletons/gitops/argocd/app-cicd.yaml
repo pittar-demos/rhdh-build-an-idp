@@ -5,6 +5,7 @@ metadata:
   labels:
     gitops.ownedBy: openshift-gitops
     category: apps
+    backstage.io/kubernetes-id: ${{values.componentId}}
   name: ${{values.componentId}}-cicd
 spec:
   destination:
