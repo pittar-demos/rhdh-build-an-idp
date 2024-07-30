@@ -6,3 +6,4 @@ namespace: scm
 resources:
   - namespace.yaml
   - gitea.yaml
+  - createorg-job.yaml

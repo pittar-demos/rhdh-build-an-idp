@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "22"
+  name: create-gitea-org
+spec:
+  template:
+    spec:
+      containers:
+        - image: quay.io/pittar/toolkit:latest
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Create a Red Hat org. Wait 2min for Gitea to fully init."
+
+              sleep 120
+
+              curl -u developer:openshift \
+                -v -k -X POST \
+                "https://gitea-scm.apps-crc.testing/api/v1/orgs" \
+                -H "Content-Type: application/json" \
+                -H  "accept: application/json" \
+                --data '{"repo_admin_change_team_access": true,"username": "redhat","visibility": "public"}'
+
+              echo "Done"
+          imagePullPolicy: Always
+          name: create-gitea-org
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      terminationGracePeriodSeconds: 30
