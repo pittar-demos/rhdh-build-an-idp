@@ -1,6 +1,8 @@
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
+  labels:
+    backstage.io/kubernetes-id: ${{values.componentId}}
   generateName: initial-build-
 spec:
   pipelineRef:
