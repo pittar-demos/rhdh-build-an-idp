@@ -1,3 +1,4 @@
 resources:
   - database
   - app
+  - networkpolicy
