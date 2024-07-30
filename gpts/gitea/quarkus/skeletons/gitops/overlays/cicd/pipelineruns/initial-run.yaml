@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: initial-build-
+spec:
+  pipelineRef:
+    name: build-app
+    namespace: ${{values.namespace}}-cicd
+  workspaces:
+    - name: workspace
+      persistentVolumeClaim:
+        claimName: workspace

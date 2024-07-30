@@ -4,7 +4,7 @@ metadata:
   name: gitea-creds
   namespace: ${{values.namespace}}-cicd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "2"
     tekton.dev/git-0: https://gitea-scm.apps-crc.testing/redhat/${{values.componentId}}.git
 type: kubernetes.io/basic-auth
 stringData:

@@ -3,3 +3,4 @@ resources:
   - rbac
   - workspace-pvc.yaml
   - cicd-pipeline.yaml
+  - pipelineruns
