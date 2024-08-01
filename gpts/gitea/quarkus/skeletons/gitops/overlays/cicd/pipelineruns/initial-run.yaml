@@ -7,7 +7,6 @@ metadata:
 spec:
   pipelineRef:
     name: build-${{values.componentId}}-app
-    namespace: ${{values.namespace}}-cicd
   workspaces:
     - name: workspace
       persistentVolumeClaim:
