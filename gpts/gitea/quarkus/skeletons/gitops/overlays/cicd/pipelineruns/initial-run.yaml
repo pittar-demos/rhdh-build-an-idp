@@ -6,7 +6,7 @@ metadata:
   generateName: initial-build-
 spec:
   pipelineRef:
-    name: build-app
+    name: build-${{values.componentId}}-app
     namespace: ${{values.namespace}}-cicd
   workspaces:
     - name: workspace

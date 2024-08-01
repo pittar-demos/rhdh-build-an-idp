@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1beta1 
+kind: EventListener 
+metadata:
+  name: build-listener
+spec:
+  serviceAccountName: pipeline 
+  triggers:
+    - name: builds-webhook
+      bindings:
+        - ref: ${{values.componentId}}-binding 
+      template:
+        ref: ${{values.componentId}}-template

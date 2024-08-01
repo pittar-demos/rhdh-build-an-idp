@@ -1,0 +1,5 @@
+resources:
+  - triggerbinding.yaml
+  - triggertemplate.yaml
+  - eventlistener.yaml
+  - triggerroute.yaml

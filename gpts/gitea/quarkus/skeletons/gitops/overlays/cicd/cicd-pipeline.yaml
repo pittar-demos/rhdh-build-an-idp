@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
   labels:
     backstage.io/kubernetes-id: ${{values.componentId}}
-  name: build-app
+  name: build-${{values.componentId}}-app
   namespace: ${{values.namespace}}-cicd
 spec:
   params:
