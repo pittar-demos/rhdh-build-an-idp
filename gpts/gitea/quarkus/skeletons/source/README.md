@@ -1,4 +1,6 @@
-# ${{values.repo_name}}: Hibernate ORM with Panache and RESTEasy
+# ${{values.name}}: Hibernate ORM with Panache and RESTEasy
+
+Description: ${{values.description}}
 
 This is a minimal CRUD service exposing a couple of endpoints over REST,
 with a front-end based on Angular so you can play with it from your browser.

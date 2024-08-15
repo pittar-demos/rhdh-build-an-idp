@@ -18,6 +18,7 @@ spec:
     - title: Provide information for the Quarkus Application
       required:
         - componentId
+        - name
         - description
         - groupId
         - artifactId
@@ -26,30 +27,32 @@ spec:
         - namespace
       properties:
         componentId:
+          title: Project ID
+          type: string
+          description: Unique name of the Project. Lower case with no special characters.
+          default: mydemoapp
+          pattern: '^([a-z]*)*$'
+          ui:help: Used as the component ID, Maven artifact ID, namespace base, and part of the java package path.
+        name:
           title: Name
           type: string
-          description: Unique name of the Project
-          default: my-demo-app
-          ui:field: EntityNamePicker
+          description: Full project name.
+          default: My Demo App
+          ui:help: Full project name. Used in documentation.
         description:
           title: Description
           type: string
-          description: Project description
+          description: Project description. Used in documentation.
         groupId:
           title: Group ID
           type: string
           default: ca.pitt.demo.idp
           description: Maven Group ID eg (ca.pitt.demo)
-        artifactId:
-          title: Artifact ID
-          type: string
-          default: quarkusapp
-          description: Maven Artifact ID
         javaPackageName:
           title: Java Package Namespace
           type: string
-          default: ca/pitt/demo/idp/quarkusapp
-          description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID and Artifact ID
+          default: ca/pitt/demo/idp/
+          description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID.
         owner:
           title: Repo Owner
           type: string
@@ -59,10 +62,9 @@ spec:
             - dev-team-a
             - dev-team-b
             - dev-team-c
-        namespace:
-          title: Namespace
-          type: string
-          description: Namespace base name
+      errorMessage:
+        properties:
+          componentId: 'Only lower case letters and numbers.  No special characters.'
 
     - title: Configure the Git repository
       required:
@@ -95,17 +97,17 @@ spec:
         repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}
         componentId: ${{ parameters.componentId }}
         groupId: ${{ parameters.groupId }}
-        artifactId: ${{ parameters.artifactId }}
-        javaPackageName: ${{ parameters.javaPackageName }}
-        name: ${{ parameters.componentId }}
+        artifactId: ${{ parameters.componentId }}
+        javaPackageName: ${{ parameters.javaPackageName }}/${{ parameters.componentId }}
+        name: ${{ parameters.name }}
         owner: ${{ parameters.owner }}
-        description: This is a quarkus project
+        description: ${{ parameters.description }}
           
   - action: publish:gitea
     id: publishSource
     name: Publishing to a gitea source repository
     input:
-      description: This is ${{ parameters.componentId }}
+      description: ${{ parameters.description }}
       repoUrl: ${{ parameters.repo.host }}
       defaultBranch: main
       repoVisibility: private
@@ -118,20 +120,20 @@ spec:
       url: ./skeletons/gitops
       targetPath: ./gitops
       values:
-        namespace: ${{ parameters.namespace }}
+        namespace: ${{ parameters.componentId }}
         host: ${{ (parameters.repo.host | parseRepoUrl).host }}
         repo_owner: ${{ (parameters.repo.host | parseRepoUrl).owner }}
         repo_name: ${{(parameters.repo.host | parseRepoUrl).repo }}-gitops
         componentId: ${{ parameters.componentId }}
         name: ${{ parameters.componentId }}
         owner: ${{ parameters.owner }}
-        description: This is a dummy project
+        description: ${{ parameters.description }}
           
   - action: publish:gitea
     id: publishGitops
     name: Publishing to a gitea gitops repository
     input:
-      description: This is ${{ parameters.componentId }}
+      description: ${{ parameters.description }}
       repoUrl: ${{ parameters.repo.host }}-gitops
       defaultBranch: main
       repoVisibility: private
