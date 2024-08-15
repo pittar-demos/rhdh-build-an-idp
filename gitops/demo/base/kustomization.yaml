@@ -3,3 +3,4 @@ namespace: rhdh
 resources:
   - namespace.yaml
   - rhdh-token-secret.yaml
+  - consolelink.yaml

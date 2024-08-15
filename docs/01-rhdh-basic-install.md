@@ -46,4 +46,4 @@ When the pods have started up (both circles are dark blue), you can click on the
 
 Next, we will configure add some configuration to make Developer Hub more useful!
 
-[2: Golden Path Templates](02-gpts.md)
+[2: Dynamic Plugins and Golden Path Templates](02-dynamic-plugins.md)

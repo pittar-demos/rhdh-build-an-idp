@@ -1,6 +1,6 @@
-# 3. Dynamic Plugins
+# 2. Dynamic Plugins and Golden Path Templates
 
-You have your first Golden Path Template ready to go in Red Hat Developer Hub, but it wont' work quite yet... you still need to integrate Developer Hub with Gitea for scaffolding and with Argo CD to create new Argo CD Applications!
+A basic Red Hat Developer Hub install isn't all that interesting, so let's start to make it useful by adding [Golden Path Templates]() and [Dynamic Plugins]().
 
 ## Enabling Dynamic Plugins
 
@@ -33,9 +33,15 @@ data:
 
 This includes the `Gitea` community dynamic plugin, as well as three Argo CD plugins that are pre-packaged and supported by Red Hat.  You can find the Argo CD plugins on the list of supported plugins that was linked above.  Note how you add `disabled: false` in order to "enable" a plugin.
 
-This will require another update to the `app-config-rhdh.yaml` ConfigMap.  This stanza has been added:
+This will require another update to the `app-config-rhdh.yaml` ConfigMap.  The following stanzas have been added:
 
 ```
+    integrations:
+      gitea:
+        - host: gitea-scm.apps-crc.testing
+          username: ${GITEA_USERNAME}
+          password: ${GITEA_PASSWORD}
+
     argocd:
       waitCycles: 25
       secure: false
@@ -55,15 +61,41 @@ This will require another update to the `app-config-rhdh.yaml` ConfigMap.  This 
               url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
               username: ${ARGOCD_ADMIN_USER}
               password: ${ARGOCD_ADMIN_PASSWORD}
+
+    kubernetes:
+      clusterLocatorMethods:
+        - clusters:
+          - authProvider: serviceAccount
+            name: ${K8S_CLUSTER_NAME}
+            serviceAccountToken: ${K8S_CLUSTER_TOKEN}
+            url: ${K8S_CLUSTER_URL}
+            skipTLSVerify: true
+            skipMetricsLookup: true
+          type: config
+      customResources:
+        - group: 'tekton.dev'
+          apiVersion: 'v1beta1'
+          plural: 'pipelines'
+        - group: 'tekton.dev'
+          apiVersion: 'v1beta1'
+          plural: 'pipelineruns'
+        - group: 'tekton.dev'
+          apiVersion: 'v1beta1'
+          plural: 'taskruns'
+        - group: 'route.openshift.io'
+          apiVersion: 'v1'
+          plural: 'routes'
+      serviceLocatorMethod:
+          type: multiTenant
 ```
 
 This tells Developer Hub where to find your Argo CD instance as well as what credentials to use.  You can have more than one instance of Argo CD configured, but that goes beyond the scope of this demo.
 
-As you can see, we need to add more to our secret.  The easiest way to do that is to delete the old secret and re-create it.
+Additionally, it configures the Gitea integration and allows for Kubernetes (read) integration.
+
+The subsitutions that you see come from a Kubernetes secret that contains these key/value pairs.  For simplicity, you can run the command below to generate the secret.
 
 ```
-oc delete secret rhdh-secrets -n rhdh
-
 oc create secret generic rhdh-secrets  \
     --from-literal=BACKEND_AUTH_SECRET=abc123 \
     --from-literal=GITEA_USERNAME=developer \
@@ -105,7 +137,9 @@ Finally, you will need to update the `Backstage` CRD again so that the operator 
 
 ## Update Red Hat Developer Hub
 
-Just like last time, log into Argo CD and update your `rhdh-instance` Application... with GitOps!
+If you prefer the UI, then you can log into Argo CD and update your `rhdh-instance` Application. Update the git path to end in `gitops` instead of `basic`.
+
+Or... even better!  Just use the command line.
 
 ```
 oc apply -k \
@@ -113,9 +147,7 @@ oc apply -k \
     -n openshift-gitops
 ```
 
-This time, update the path to end in `gitops` instead of `gpts`.
-
-Save your Application and wait for Developer Hub to roll out.  When it's done, you should be able to create a GPT with the following result:
+Save your Application or run the above `oc` command and wait for Developer Hub to roll out.  When it's done, you should be able to create a GPT with the following result:
 * New source and gitops private repos created in Gitea.
 * Argo CD applicaiton created for the gitops repo.
 * Argo CD sync status reporting in your new Component.
