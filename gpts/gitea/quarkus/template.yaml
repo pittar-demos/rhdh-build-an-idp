@@ -54,9 +54,11 @@ spec:
           title: Repo Owner
           type: string
           description: Your SCM host organization/group
-          default: development
+          default: dev-team-a
           enum:
-            - development
+            - dev-team-a
+            - dev-team-b
+            - dev-team-c
         namespace:
           title: Namespace
           type: string

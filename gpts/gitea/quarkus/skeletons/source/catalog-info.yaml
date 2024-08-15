@@ -21,13 +21,3 @@ spec:
   type: service
   lifecycle: production
   owner: ${{values.owner | dump}}
----
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: development
-  title: Developers
-spec:
-  type: team
-  children: []
