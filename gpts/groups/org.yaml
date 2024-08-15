@@ -25,7 +25,7 @@ spec:
   targets:
     - ./ccoe-group.yaml
     - ./developers-group.yaml
-    - ./dev-team-a-group.yaml
-    - ./dev-team-b-group.yaml
-    - ./dev-team-c-group.yaml
-    - ./ccoe-team-a-group.yaml
+    - ./dev-team-a.yaml
+    - ./dev-team-b.yaml
+    - ./dev-team-c.yaml
+    - ./ccoe-team-a.yaml
