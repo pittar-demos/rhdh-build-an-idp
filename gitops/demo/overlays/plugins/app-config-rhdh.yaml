@@ -45,7 +45,12 @@ data:
         locations:
           - type: url
             target: https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
-            
+
+    techdocs:
+      builder: 'local'
+      publisher:
+        type: 'local'
+
     backend:
       auth:
         keys:
