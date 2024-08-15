@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: ccoe-team-a
+  description: CCoE Team A
+spec:
+  type: team
+  profile:
+    displayName: CCoE Team A
+    email: ccoe-team-a@example.com
+    picture: https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Lola
+  parent: ccoe
+  children: []

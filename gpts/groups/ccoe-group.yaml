@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: ccoe
+  description: Cloud Centre of Experience team
+spec:
+  type: department
+  profile:
+    displayName: CCoE Department
+  parent: pitt-corp
+  children: [ccoe-team-a]

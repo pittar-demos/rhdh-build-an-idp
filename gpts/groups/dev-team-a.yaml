@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: dev-team-a
+  description: DEV Team A
+spec:
+  type: team
+  profile:
+    displayName: DEV Team A
+    email: team-a@example.com
+    picture: https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Cuddles
+  parent: developers
+  children: []

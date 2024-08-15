@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: developers
+  description: The development department
+spec:
+  type: department
+  profile:
+    displayName: Developers Department
+  parent: pitt-corp
+  children: [dev-team-a,dev-team-b,dev-team-c]

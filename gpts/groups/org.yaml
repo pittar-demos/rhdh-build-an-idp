@@ -1,0 +1,31 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: pitt-corp
+  description: The pitt-corp organization
+  links:
+    - url: https://github.com/pittar
+      title: Website
+    - url: https://github.com/pittar-demos
+      title: Intranet
+spec:
+  type: organization
+  profile:
+    displayName: PITT Corp
+    email: info@example.com
+    picture: https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Sam
+  children: [developers,ccoe]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: example-groups
+  description: A collection of all Backstage example Groups
+spec:
+  targets:
+    - ./ccoe-group.yaml
+    - ./developers-group.yaml
+    - ./dev-team-a-group.yaml
+    - ./dev-team-b-group.yaml
+    - ./dev-team-c-group.yaml
+    - ./ccoe-team-a-group.yaml
