@@ -7,6 +7,7 @@ metadata:
   {%- endif %}
   annotations:
     backstage.io/source-location: url:https://${{values.host}}/${{values.repo_owner}}/${{values.repo_name}}
+    backstage.io/techdocs-ref: dir:.
     argocd/app-name: ${{values.componentId}}
     backstage.io/kubernetes-id: ${{values.componentId}}
     janus-idp.io/tekton: ${{values.componentId}}
