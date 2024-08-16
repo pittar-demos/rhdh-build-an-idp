@@ -11,7 +11,7 @@ metadata:
     - java
     - maven
 spec:
-  owner: guests
+  owner: developers
   type: service
 
   parameters:
@@ -21,10 +21,7 @@ spec:
         - name
         - description
         - groupId
-        - artifactId
-        - javaPackageName
         - owner
-        - namespace
       properties:
         componentId:
           title: Project ID
@@ -47,12 +44,7 @@ spec:
           title: Group ID
           type: string
           default: ca.pitt.demo.idp
-          description: Maven Group ID eg (ca.pitt.demo)
-        javaPackageName:
-          title: Java Package Namespace
-          type: string
-          default: ca/pitt/demo/idp/
-          description: Name for the Java Package (ensure to use the / character as this is used for folder structure) should match Group ID.
+          description: Maven Group ID eg (ca.pitt.demo).  Also used for package name.
         owner:
           title: Repo Owner
           type: string
@@ -64,7 +56,7 @@ spec:
             - dev-team-c
       errorMessage:
         properties:
-          componentId: 'Only lower case letters and numbers.  No special characters.'
+          componentId: Only lower case letters and numbers.  No special characters.
 
     - title: Configure the Git repository
       required:
@@ -98,7 +90,7 @@ spec:
         componentId: ${{ parameters.componentId }}
         groupId: ${{ parameters.groupId }}
         artifactId: ${{ parameters.componentId }}
-        javaPackageName: ${{ parameters.javaPackageName }}/${{ parameters.componentId }}
+        javaPackageName: '${{ parameters.groupId | replace("\.", "/") }}/${{ parameters.componentId }}'
         name: ${{ parameters.name }}
         owner: ${{ parameters.owner }}
         description: ${{ parameters.description }}
