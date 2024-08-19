@@ -7,7 +7,8 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repo-creds
 stringData:
-  url: https://gitea-scm.apps-crc.testing
+  #url: https://gitea-scm.apps-crc.testing
+  url: https://gitea-scm.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
   type: git
   password: openshift
   username: developer
