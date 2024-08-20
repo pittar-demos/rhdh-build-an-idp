@@ -17,6 +17,19 @@ spec:
           value: "0"
       secrets:
         - name: rhdh-secrets
+    extraVolumeMounts:
+      - mountPath: /opt/app-root/src/techdocs-data
+        name: tech-docs-root
+    extraVolumes:
+      - ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+        name: tech-docs-root
     replicas: 1
     route:
       enabled: true

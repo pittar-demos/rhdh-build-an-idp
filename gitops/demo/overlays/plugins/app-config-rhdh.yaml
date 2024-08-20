@@ -62,6 +62,8 @@ data:
         runIn: 'local'
       publisher:
         type: 'local'
+        local:
+          publishDirectory: /opt/app-root/src/techdocs-data
 
     backend:
       auth:
