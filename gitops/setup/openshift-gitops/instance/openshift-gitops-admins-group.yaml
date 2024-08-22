@@ -6,5 +6,5 @@ metadata:
   name: openshift-gitops-admins
 users:
   - opentlc-mgr
-  - kubeadmin
+  - kube:admin
   - admin
