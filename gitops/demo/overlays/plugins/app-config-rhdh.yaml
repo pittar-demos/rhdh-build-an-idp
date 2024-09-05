@@ -6,8 +6,7 @@ data:
   app-config-rhdh.yaml: |
     app:
       title: Super Duper IDP
-      baseUrl: https://backstage-developer-hub-rhdh.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
-      #baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
       
     auth:
       providers:
@@ -16,12 +15,9 @@ data:
 
     integrations:
       gitea:
-        - host: gitea-scm.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
+        - host: gitea-scm.apps-crc.testing
           username: ${GITEA_USERNAME}
           password: ${GITEA_PASSWORD}
-        # - host: gitea-scm.apps-crc.testing
-        #   username: ${GITEA_USERNAME}
-        #   password: ${GITEA_PASSWORD}
 
     argocd:
       waitCycles: 25
@@ -39,22 +35,16 @@ data:
         - type: 'config'
           instances:
             - name: openshift-gitops
-              url: https://openshift-gitops-server-openshift-gitops.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
+              url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
               username: ${ARGOCD_ADMIN_USER}
               password: ${ARGOCD_ADMIN_PASSWORD}
-            # - name: openshift-gitops
-            #   url: https://openshift-gitops-server-openshift-gitops.apps-crc.testing
-            #   username: ${ARGOCD_ADMIN_USER}
-            #   password: ${ARGOCD_ADMIN_PASSWORD}
 
     catalog:
         rules:
           - allow: [Component, System, Group, Resource, Location, Template, API]
         locations:
           - type: url
-            target: https://gitea-scm.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
-          # - type: url
-          #   target: https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
+            target: https://gitea-scm.apps-crc.testing/developer/rhdh-build-an-idp/src/branch/main/gpts/demo-templates.yaml
   
     techdocs:
       builder: 'local'
@@ -67,11 +57,9 @@ data:
       auth:
         keys:
           - secret: ${BACKEND_AUTH_SECRET}
-      baseUrl: https://backstage-developer-hub-rhdh.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
-      # baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
+      baseUrl: https://backstage-developer-hub-rhdh.apps-crc.testing
       cors:
-        origin: https://backstage-developer-hub-rhdh.apps.cluster-w8rdk.w8rdk.sandbox848.opentlc.com
-        # origin: https://backstage-developer-hub-rhdh.apps-crc.testing
+        origin: https://backstage-developer-hub-rhdh.apps-crc.testing
 
     kubernetes:
       clusterLocatorMethods:

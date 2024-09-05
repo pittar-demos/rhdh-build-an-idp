@@ -15,7 +15,7 @@ spec:
             - |
               echo "Create a Red Hat org. Wait 2min for Gitea to fully init."
 
-              sleep 120
+              sleep 180
 
               curl -u developer:openshift \
                 -v -k -X POST \
